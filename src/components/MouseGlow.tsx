@@ -12,27 +12,16 @@ export default function MouseGlow() {
     let glowY = mouseY
     let raf = 0
 
-    const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX
-      mouseY = e.clientY
-    }
-
+    const onMove = (e: MouseEvent) => { mouseX = e.clientX; mouseY = e.clientY }
     const animate = () => {
       glowX += (mouseX - glowX) * 0.08
       glowY += (mouseY - glowY) * 0.08
-      if (ref.current) {
-        ref.current.style.left = `${glowX}px`
-        ref.current.style.top = `${glowY}px`
-      }
+      if (ref.current) { ref.current.style.left = `${glowX}px`; ref.current.style.top = `${glowY}px` }
       raf = requestAnimationFrame(animate)
     }
     animate()
-
     window.addEventListener('mousemove', onMove)
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('mousemove', onMove)
-    }
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('mousemove', onMove) }
   }, [])
 
   return <div ref={ref} className="mouse-glow" />

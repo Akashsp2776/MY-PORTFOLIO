@@ -4,8 +4,8 @@ export const personal = {
   email: 'akashsp1971@gmail.com',
   phone: '+91 9686336227',
   location: 'Tarikere, Chikkamagalur · Bengaluru, Karnataka',
-  github: 'https://github.com/Akashsp2776',
-  linkedin: 'https://linkedin.com/in/akash-sp',
+  github: 'https://github.com/Akashsp2776?tab=repositories',
+  linkedin: 'https://www.linkedin.com/in/akash-sp-648111297/',
   university: 'Presidency University, Bengaluru',
   tagline: 'Building software that solves real-world problems.',
   summary:
@@ -62,10 +62,9 @@ export const projects: Project[] = [
       'Only registered users can vote',
       'Clean polling interface',
     ],
-    image:
-      'https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#7c3aed',
-    github: 'https://github.com/Akashsp2776/secure-voting-system',
+    github: 'https://github.com/Akashsp2776?tab=repositories',
     demo: '#',
     features: [
       'Secure user registration & login',
@@ -75,25 +74,11 @@ export const projects: Project[] = [
       'Responsive polling UI',
     ],
     challenges: [
-      {
-        challenge: 'Implementing cryptographic hashing without backend frameworks',
-        solution: 'Used Python hashlib to implement SHA-256 hashing from scratch, ensuring passwords were never stored in plaintext.',
-      },
-      {
-        challenge: 'Preventing duplicate votes with minimal database',
-        solution: 'Maintained a voted-users set checked before each ballot submission, rejecting duplicates at the application layer.',
-      },
+      { challenge: 'Implementing cryptographic hashing without backend frameworks', solution: 'Used Python hashlib to implement SHA-256 hashing from scratch, ensuring passwords were never stored in plaintext.' },
+      { challenge: 'Preventing duplicate votes with minimal database', solution: 'Maintained a voted-users set checked before each ballot submission, rejecting duplicates at the application layer.' },
     ],
-    learnings: [
-      'Cryptography fundamentals in web security',
-      'Authentication flow design',
-      'Cybersecurity best practices',
-    ],
-    futureImprovements: [
-      'Add blockchain-based vote verification',
-      'Implement biometric voter authentication',
-      'Build real-time results dashboard',
-    ],
+    learnings: ['Cryptography fundamentals in web security', 'Authentication flow design', 'Cybersecurity best practices'],
+    futureImprovements: ['Add blockchain-based vote verification', 'Implement biometric voter authentication', 'Build real-time results dashboard'],
     timeline: [
       { phase: 'Research & Design', duration: '1 week' },
       { phase: 'Core Development', duration: '2 weeks' },
@@ -119,10 +104,9 @@ export const projects: Project[] = [
       'Python & Java sensor data processing',
       'Smart building IoT applications',
     ],
-    image:
-      'https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#0891b2',
-    github: '#',
+    github: 'https://github.com/Akashsp2776?tab=repositories',
     demo: '#',
     features: [
       'Live sensor data monitoring',
@@ -132,25 +116,11 @@ export const projects: Project[] = [
       'Data logging & reporting',
     ],
     challenges: [
-      {
-        challenge: 'Hardware-software integration across platforms',
-        solution: 'Used serial communication between Arduino and Raspberry Pi, with Python processing sensor data and Java handling alert logic.',
-      },
-      {
-        challenge: 'Sensor calibration for accuracy',
-        solution: 'Implemented a calibration routine that baselined sensor readings against known water samples before deployment.',
-      },
+      { challenge: 'Hardware-software integration across platforms', solution: 'Used serial communication between Arduino and Raspberry Pi, with Python processing sensor data and Java handling alert logic.' },
+      { challenge: 'Sensor calibration for accuracy', solution: 'Implemented a calibration routine that baselined sensor readings against known water samples before deployment.' },
     ],
-    learnings: [
-      'IoT system architecture',
-      'Hardware-software interfacing',
-      'Real-time data processing',
-    ],
-    futureImprovements: [
-      'Cloud dashboard for remote monitoring',
-      'Machine learning for predictive maintenance',
-      'Mobile app with push notifications',
-    ],
+    learnings: ['IoT system architecture', 'Hardware-software interfacing', 'Real-time data processing'],
+    futureImprovements: ['Cloud dashboard for remote monitoring', 'Machine learning for predictive maintenance', 'Mobile app with push notifications'],
     timeline: [
       { phase: 'Hardware Setup', duration: '2 weeks' },
       { phase: 'Software Development', duration: '3 weeks' },
@@ -176,10 +146,9 @@ export const projects: Project[] = [
       'Booking confirmation popup',
       'Responsive across devices',
     ],
-    image:
-      'https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#2563eb',
-    github: '#',
+    github: 'https://github.com/Akashsp2776?tab=repositories',
     demo: '#',
     features: [
       'Teacher directory & selection',
@@ -189,27 +158,11 @@ export const projects: Project[] = [
       'Responsive UI',
     ],
     challenges: [
-      {
-        challenge: 'Dynamic time slot rendering without a backend',
-        solution: 'Used vanilla JavaScript to dynamically generate time slot DOM elements based on selected teacher and date.',
-      },
-      {
-        challenge: 'State management in vanilla JS',
-        solution: 'Implemented a lightweight state object pattern to track selected teacher, date, and slot across the booking flow.',
-      },
+      { challenge: 'Dynamic time slot rendering without a backend', solution: 'Used vanilla JavaScript to dynamically generate time slot DOM elements based on selected teacher and date.' },
+      { challenge: 'State management in vanilla JS', solution: 'Implemented a lightweight state object pattern to track selected teacher, date, and slot across the booking flow.' },
     ],
-    learnings: [
-      'DOM manipulation best practices',
-      'UX design for scheduling flows',
-      'Responsive CSS layouts',
-    ],
-    futureImprovements: [
-      'User Authentication (JWT)',
-      'Node.js + Express Backend',
-      'Email Notifications',
-      'Admin Dashboard',
-      'MongoDB Database Integration',
-    ],
+    learnings: ['DOM manipulation best practices', 'UX design for scheduling flows', 'Responsive CSS layouts'],
+    futureImprovements: ['User Authentication (JWT)', 'Node.js + Express Backend', 'Email Notifications', 'Admin Dashboard', 'MongoDB Database Integration'],
     timeline: [
       { phase: 'UI Design', duration: '1 week' },
       { phase: 'Frontend Development', duration: '2 weeks' },
@@ -235,10 +188,9 @@ export const projects: Project[] = [
       'Cash, UPI, and Card payment options',
       'Responsive design',
     ],
-    image:
-      'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#d97706',
-    github: '#',
+    github: 'https://github.com/Akashsp2776?tab=repositories',
     demo: '#',
     features: [
       'Reservation form (event type, date, guest count)',
@@ -248,25 +200,11 @@ export const projects: Project[] = [
       'Mobile-first responsive design',
     ],
     challenges: [
-      {
-        challenge: 'Managing complex form state across multiple sections',
-        solution: 'Structured the form into discrete sections (reservation, menu, payment) each with isolated state, merged at submission.',
-      },
-      {
-        challenge: 'Building a cart-like food ordering flow without frameworks',
-        solution: 'Created a JavaScript cart module that tracked items, quantities, and totals with real-time DOM updates.',
-      },
+      { challenge: 'Managing complex form state across multiple sections', solution: 'Structured the form into discrete sections (reservation, menu, payment) each with isolated state, merged at submission.' },
+      { challenge: 'Building a cart-like food ordering flow without frameworks', solution: 'Created a JavaScript cart module that tracked items, quantities, and totals with real-time DOM updates.' },
     ],
-    learnings: [
-      'Multi-step form UX patterns',
-      'JavaScript state management',
-      'Payment flow design',
-    ],
-    futureImprovements: [
-      'Backend with order management database',
-      'Admin dashboard for catering staff',
-      'Integration with payment gateways',
-    ],
+    learnings: ['Multi-step form UX patterns', 'JavaScript state management', 'Payment flow design'],
+    futureImprovements: ['Backend with order management database', 'Admin dashboard for catering staff', 'Integration with payment gateways'],
     timeline: [
       { phase: 'Design & Planning', duration: '1 week' },
       { phase: 'Development', duration: '2 weeks' },
@@ -292,10 +230,9 @@ export const projects: Project[] = [
       'Dot navigation indicators',
       'Fully responsive',
     ],
-    image:
-      'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#059669',
-    github: '#',
+    github: 'https://github.com/Akashsp2776?tab=repositories',
     demo: '#',
     features: [
       'Auto-play with configurable interval',
@@ -305,21 +242,10 @@ export const projects: Project[] = [
       'Responsive for all screen sizes',
     ],
     challenges: [
-      {
-        challenge: 'Smooth animation timing without JavaScript animation libraries',
-        solution: 'Used CSS transition with cubic-bezier easing for slide transforms, triggered by class toggling in JavaScript.',
-      },
+      { challenge: 'Smooth animation timing without JavaScript animation libraries', solution: 'Used CSS transition with cubic-bezier easing for slide transforms, triggered by class toggling in JavaScript.' },
     ],
-    learnings: [
-      'CSS transition mastery',
-      'Vanilla JS event handling',
-      'Responsive UI without frameworks',
-    ],
-    futureImprovements: [
-      'Add lazy loading for images',
-      'Implement keyboard arrow navigation',
-      'Add thumbnail strip navigation',
-    ],
+    learnings: ['CSS transition mastery', 'Vanilla JS event handling', 'Responsive UI without frameworks'],
+    futureImprovements: ['Add lazy loading for images', 'Implement keyboard arrow navigation', 'Add thumbnail strip navigation'],
     timeline: [
       { phase: 'Build', duration: '2 days' },
       { phase: 'Animation Polish', duration: '1 day' },
@@ -339,11 +265,7 @@ export type SkillGroup = {
 
 export const skillGroups: SkillGroup[] = [
   {
-    id: 'frontend',
-    label: 'Frontend',
-    color: '#2563eb',
-    glow: 'rgba(37,99,235,0.4)',
-    icon: '🌐',
+    id: 'frontend', label: 'Frontend', color: '#2563eb', glow: 'rgba(37,99,235,0.4)', icon: '🌐',
     skills: [
       { name: 'HTML5', level: 90 },
       { name: 'CSS3', level: 85 },
@@ -353,11 +275,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    id: 'backend',
-    label: 'Backend',
-    color: '#7c3aed',
-    glow: 'rgba(124,58,237,0.4)',
-    icon: '⚙️',
+    id: 'backend', label: 'Backend', color: '#7c3aed', glow: 'rgba(124,58,237,0.4)', icon: '⚙️',
     skills: [
       { name: 'Node.js', level: 70 },
       { name: 'Express.js', level: 65 },
@@ -365,11 +283,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    id: 'languages',
-    label: 'Programming Languages',
-    color: '#0891b2',
-    glow: 'rgba(8,145,178,0.4)',
-    icon: '💻',
+    id: 'languages', label: 'Programming Languages', color: '#0891b2', glow: 'rgba(8,145,178,0.4)', icon: '💻',
     skills: [
       { name: 'Java', level: 85 },
       { name: 'Advanced Java', level: 78 },
@@ -378,22 +292,14 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    id: 'databases',
-    label: 'Databases',
-    color: '#059669',
-    glow: 'rgba(5,150,105,0.4)',
-    icon: '🗄️',
+    id: 'databases', label: 'Databases', color: '#059669', glow: 'rgba(5,150,105,0.4)', icon: '🗄️',
     skills: [
       { name: 'MySQL', level: 78 },
       { name: 'MongoDB', level: 70 },
     ],
   },
   {
-    id: 'tools',
-    label: 'Developer Tools',
-    color: '#d97706',
-    glow: 'rgba(217,119,6,0.4)',
-    icon: '🛠️',
+    id: 'tools', label: 'Developer Tools', color: '#d97706', glow: 'rgba(217,119,6,0.4)', icon: '🛠️',
     skills: [
       { name: 'Git', level: 82 },
       { name: 'GitHub', level: 85 },
@@ -404,11 +310,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    id: 'ai-tools',
-    label: 'AI Tools',
-    color: '#a855f7',
-    glow: 'rgba(168,85,247,0.4)',
-    icon: '🤖',
+    id: 'ai-tools', label: 'AI Tools', color: '#a855f7', glow: 'rgba(168,85,247,0.4)', icon: '🤖',
     skills: [
       { name: 'ChatGPT', level: 88 },
       { name: 'GitHub Copilot', level: 82 },
@@ -420,12 +322,7 @@ export const skillGroups: SkillGroup[] = [
 
 export const experiences = [
   {
-    id: 'internpe',
-    company: 'INTERNPE',
-    role: 'Java Developer Intern',
-    period: 'July 2024 – April 2025',
-    type: 'Internship',
-    color: '#7c3aed',
+    id: 'internpe', company: 'INTERNPE', role: 'Java Developer Intern', period: 'July 2024 – April 2025', type: 'Internship', color: '#7c3aed',
     highlights: [
       'Developed and optimized Java-based applications using OOP, improving system performance and real-world coding standards in a collaborative environment.',
       'Worked with Git, MySQL, and IntelliJ IDEA to debug, test, and deploy scalable solutions — hands-on experience in backend logic, database connectivity, and version control.',
@@ -433,12 +330,7 @@ export const experiences = [
     ],
   },
   {
-    id: 'unifiedmentor',
-    company: 'Unified Mentor Private Limited',
-    role: 'Software Engineering Intern',
-    period: '2024',
-    type: 'Internship',
-    color: '#2563eb',
+    id: 'unifiedmentor', company: 'Unified Mentor Private Limited', role: 'Software Engineering Intern', period: '2024', type: 'Internship', color: '#2563eb',
     highlights: [
       'Gained practical software engineering experience working on real-world projects.',
       'Applied Java and web development skills in a professional team setting.',
@@ -447,36 +339,9 @@ export const experiences = [
 ]
 
 export const education = [
-  {
-    id: 'btech',
-    institution: 'Presidency University, Bengaluru',
-    degree: 'Bachelor of Technology',
-    field: 'Computer Science & Engineering',
-    period: '2023 – 2027',
-    status: 'Current',
-    color: '#2563eb',
-    highlights: ['Full Stack Development', 'Data Structures & Algorithms', 'Java & OOP', 'Database Systems'],
-  },
-  {
-    id: 'pu',
-    institution: 'PACE UM PU COLLEGE, Shivamogga',
-    degree: 'Senior Secondary (12th)',
-    field: 'Science — PCMB',
-    period: '2021 – 2023',
-    status: 'Completed',
-    color: '#7c3aed',
-    highlights: ['Percentage: 91.5%'],
-  },
-  {
-    id: 'school',
-    institution: 'Sharadha Residential School',
-    degree: 'Higher Secondary (10th)',
-    field: '',
-    period: '2018 – 2021',
-    status: 'Completed',
-    color: '#0891b2',
-    highlights: ['Percentage: 90.36%'],
-  },
+  { id: 'btech', institution: 'Presidency University, Bengaluru', degree: 'Bachelor of Technology', field: 'Computer Science & Engineering', period: '2023 – 2027', status: 'Current', color: '#2563eb', highlights: ['Full Stack Development', 'Data Structures & Algorithms', 'Java & OOP', 'Database Systems'] },
+  { id: 'pu', institution: 'PACE UM PU COLLEGE, Shivamogga', degree: 'Senior Secondary (12th)', field: 'Science — PCMB', period: '2021 – 2023', status: 'Completed', color: '#7c3aed', highlights: ['Percentage: 91.5%'] },
+  { id: 'school', institution: 'Sharadha Residential School', degree: 'Higher Secondary (10th)', field: '', period: '2018 – 2021', status: 'Completed', color: '#0891b2', highlights: ['Percentage: 90.36%'] },
 ]
 
 export const certifications = [
@@ -505,19 +370,10 @@ export const techJourney = [
 
 export const currentlyBuilding = [
   {
-    id: 'cb1',
-    title: 'Teacher–Student Booking Appointment v2',
-    progress: 45,
+    id: 'cb1', title: 'Teacher–Student Booking Appointment v2', progress: 45,
     description: 'Adding authentication, backend, notifications, and an admin dashboard.',
-    upcoming: [
-      'User Authentication (JWT)',
-      'Node.js + Express Backend',
-      'Email Notifications',
-      'Admin Dashboard',
-      'MongoDB Database Integration',
-    ],
-    eta: 'Q3 2025',
-    tech: ['React', 'Node.js', 'MongoDB', 'JWT'],
+    upcoming: ['User Authentication (JWT)', 'Node.js + Express Backend', 'Email Notifications', 'Admin Dashboard', 'MongoDB Database Integration'],
+    eta: 'Q3 2025', tech: ['React', 'Node.js', 'MongoDB', 'JWT'],
   },
 ]
 

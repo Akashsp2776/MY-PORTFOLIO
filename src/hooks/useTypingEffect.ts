@@ -7,7 +7,6 @@ export function useTypingEffect(words: string[], typeSpeed = 90, deleteSpeed = 4
 
   useEffect(() => {
     const current = words[wordIndex % words.length]
-
     let timeout: ReturnType<typeof setTimeout>
 
     if (!deleting && text === current) {
@@ -18,9 +17,7 @@ export function useTypingEffect(words: string[], typeSpeed = 90, deleteSpeed = 4
     } else {
       timeout = setTimeout(
         () => {
-          setText((prev) =>
-            deleting ? current.slice(0, prev.length - 1) : current.slice(0, prev.length + 1),
-          )
+          setText((prev) => (deleting ? current.slice(0, prev.length - 1) : current.slice(0, prev.length + 1)))
         },
         deleting ? deleteSpeed : typeSpeed,
       )

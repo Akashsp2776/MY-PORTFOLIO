@@ -29,12 +29,8 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 opacity-70">
-        <ParticleField density={50} />
-      </div>
-
+      <div className="absolute inset-0 opacity-70"><ParticleField density={50} /></div>
       <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-b opacity-40" />
-
       <div className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px] animate-float-slow" />
       <div className="pointer-events-none absolute right-0 top-40 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px] animate-float" />
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[100px]" />
@@ -60,7 +56,6 @@ export default function Hero() {
       ))}
 
       <div className="relative px-container mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-12 pt-28 pb-16 lg:flex-row">
-        {/* Left: text content */}
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-2xl flex-1">
           <motion.div variants={item} className="mb-6">
             <span className="chip">
@@ -68,18 +63,12 @@ export default function Hero() {
               Open to Software Engineering & Full Stack Internships — 2026
             </span>
           </motion.div>
-
           <motion.div variants={item} className="mb-3">
             <p className="font-mono text-sm text-cyan-400">Hi, I'm</p>
           </motion.div>
-
-          <motion.h1
-            variants={item}
-            className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-8xl"
-          >
+          <motion.h1 variants={item} className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-8xl">
             AKASH <span className="text-gradient-blue">SP</span>
           </motion.h1>
-
           <motion.div variants={item} className="mt-5 flex items-center gap-3">
             <Code2 className="h-5 w-5 shrink-0 text-purple-400" />
             <span className="font-mono text-base text-slate-300 sm:text-lg">
@@ -87,14 +76,9 @@ export default function Hero() {
               <span className="ml-0.5 inline-block h-5 w-0.5 animate-pulse bg-cyan-400" />
             </span>
           </motion.div>
-
-          <motion.p
-            variants={item}
-            className="mt-8 max-w-xl text-balance text-base leading-relaxed text-slate-400 sm:text-lg"
-          >
+          <motion.p variants={item} className="mt-8 max-w-xl text-balance text-base leading-relaxed text-slate-400 sm:text-lg">
             {personal.summary}
           </motion.p>
-
           <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#portfolio" className="btn-primary group">
               View Engineering Portfolio
@@ -104,11 +88,8 @@ export default function Hero() {
               <Download className="h-4 w-4" />
               Download Resume
             </a>
-            <a href="#contact" className="btn-ghost">
-              Contact Me
-            </a>
+            <a href="#contact" className="btn-ghost">Contact Me</a>
           </motion.div>
-
           <motion.div variants={item} className="mt-8 flex items-center gap-4">
             <span className="font-mono text-xs uppercase tracking-wider text-slate-500">Find me on</span>
             <div className="flex items-center gap-3">
@@ -140,40 +121,24 @@ export default function Hero() {
           className="relative hidden flex-1 justify-center lg:flex"
         >
           <div className="relative h-[420px] w-[380px]">
-            {/* Orbit rings */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
               className="absolute inset-0 rounded-full border border-white/5"
             >
-              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-                <div className="glass grid h-12 w-12 place-items-center rounded-xl text-2xl">⚛️</div>
-              </div>
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2">
-                <div className="glass grid h-12 w-12 place-items-center rounded-xl text-2xl">☕</div>
-              </div>
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
-                <div className="glass grid h-12 w-12 place-items-center rounded-xl text-2xl">💚</div>
-              </div>
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2">
-                <div className="glass grid h-12 w-12 place-items-center rounded-xl text-2xl">🤖</div>
-              </div>
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"><div className="glass grid h-12 w-12 place-items-center rounded-xl text-2xl">⚛️</div></div>
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2"><div className="glass grid h-12 w-12 place-items-center rounded-xl text-2xl">☕</div></div>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2"><div className="glass grid h-12 w-12 place-items-center rounded-xl text-2xl">💚</div></div>
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2"><div className="glass grid h-12 w-12 place-items-center rounded-xl text-2xl">🤖</div></div>
             </motion.div>
-
             <motion.div
               animate={{ rotate: -360 }}
               transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
               className="absolute inset-8 rounded-full border border-white/5"
             >
-              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-                <div className="glass grid h-10 w-10 place-items-center rounded-xl text-xl">⚡</div>
-              </div>
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
-                <div className="glass grid h-10 w-10 place-items-center rounded-xl text-xl">🔗</div>
-              </div>
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"><div className="glass grid h-10 w-10 place-items-center rounded-xl text-xl">⚡</div></div>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2"><div className="glass grid h-10 w-10 place-items-center rounded-xl text-xl">🔗</div></div>
             </motion.div>
-
-            {/* Center card */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
@@ -202,8 +167,6 @@ export default function Hero() {
                 </div>
               </div>
             </motion.div>
-
-            {/* Glow */}
             <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-500/20 blur-3xl" />
           </div>
         </motion.div>

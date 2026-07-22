@@ -26,9 +26,7 @@ export default function App() {
   const activeProject = projects.find((p) => p.id === caseStudyId)
 
   useEffect(() => {
-    if (caseStudyId) {
-      window.scrollTo({ top: 0, behavior: 'instant' })
-    }
+    if (caseStudyId) window.scrollTo({ top: 0, behavior: 'instant' })
   }, [caseStudyId])
 
   return (
@@ -37,14 +35,9 @@ export default function App() {
       <MouseGlow />
       <ScrollProgress />
       <Navbar />
-
       <AnimatePresence mode="wait">
         {activeProject ? (
-          <CaseStudy
-            key="case-study"
-            project={activeProject}
-            onBack={() => setCaseStudyId(null)}
-          />
+          <CaseStudy key="case-study" project={activeProject} onBack={() => setCaseStudyId(null)} />
         ) : (
           <main key="main">
             <Hero />
@@ -62,7 +55,6 @@ export default function App() {
           </main>
         )}
       </AnimatePresence>
-
       {!activeProject && <Footer />}
       <BackToTop />
     </div>

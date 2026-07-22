@@ -12,10 +12,7 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setSent(true)
-    setTimeout(() => {
-      setSent(false)
-      setForm({ name: '', email: '', message: '' })
-    }, 3500)
+    setTimeout(() => { setSent(false); setForm({ name: '', email: '', message: '' }) }, 3500)
   }
 
   const contactItems = [
@@ -29,136 +26,50 @@ export default function Contact() {
   return (
     <section id="contact" ref={ref} className="py-section relative overflow-hidden">
       <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-purple-600/10 blur-[120px]" />
-
       <div className="px-container mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span className="eyebrow mb-6">
-            <span className="h-px w-8 bg-cyan-400" />
-            Contact
-          </span>
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
+          <span className="eyebrow mb-6"><span className="h-px w-8 bg-cyan-400" />Contact</span>
           <h2 className="section-title text-balance max-w-2xl">Let's build something together.</h2>
-          <p className="mt-4 max-w-xl text-slate-400">
-            I'm actively seeking Software Engineering, Full Stack, Java, AI, and Backend
-            internships. If you're hiring — or just want to connect — I'd love to hear from you.
-          </p>
+          <p className="mt-4 max-w-xl text-slate-400">I'm actively seeking Software Engineering, Full Stack, Java, AI, and Backend internships. If you're hiring — or just want to connect — I'd love to hear from you.</p>
         </motion.div>
-
-        {/* Availability badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-emerald-400/20 bg-emerald-400/5 px-4 py-2"
-        >
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-          </span>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.2 }} className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-emerald-400/20 bg-emerald-400/5 px-4 py-2">
+          <span className="relative flex h-2.5 w-2.5"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" /><span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" /></span>
           <span className="text-sm font-medium text-emerald-300">Available for internships — Summer/Fall 2026</span>
         </motion.div>
-
         <div className="mt-12 grid gap-6 lg:grid-cols-5">
-          {/* Contact info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-2"
-          >
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }} className="lg:col-span-2">
             <div className="space-y-3">
               {contactItems.map(({ icon: Icon, label, value, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith('http') ? '_blank' : undefined}
-                  rel={href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="gradient-border group flex items-center gap-4 p-4 transition-all duration-300 hover:scale-[1.02]"
-                >
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 text-cyan-400">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <div className="min-w-0">
-                    <div className="text-xs uppercase tracking-wider text-slate-500">{label}</div>
-                    <div className="truncate text-sm font-medium text-slate-200 group-hover:text-white">{value}</div>
-                  </div>
+                <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined} className="gradient-border group flex items-center gap-4 p-4 transition-all duration-300 hover:scale-[1.02]">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 text-cyan-400"><Icon className="h-5 w-5" /></span>
+                  <div className="min-w-0"><div className="text-xs uppercase tracking-wider text-slate-500">{label}</div><div className="truncate text-sm font-medium text-slate-200 group-hover:text-white">{value}</div></div>
                 </a>
               ))}
             </div>
-
-            {/* Map placeholder */}
             <div id="map" className="gradient-border mt-3 overflow-hidden p-0">
               <div className="relative flex h-32 items-center justify-center bg-gradient-to-br from-blue-600/10 to-purple-600/10">
                 <div className="absolute inset-0 grid-bg opacity-30" />
-                <div className="relative flex flex-col items-center gap-2 text-slate-400">
-                  <Map className="h-6 w-6 text-cyan-400" />
-                  <span className="text-xs">Bengaluru, Karnataka, India</span>
-                </div>
+                <div className="relative flex flex-col items-center gap-2 text-slate-400"><Map className="h-6 w-6 text-cyan-400" /><span className="text-xs">Bengaluru, Karnataka, India</span></div>
               </div>
             </div>
           </motion.div>
-
-          {/* Form */}
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="gradient-border space-y-5 p-7 lg:col-span-3"
-          >
+          <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }} className="gradient-border space-y-5 p-7 lg:col-span-3">
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-200">Name</label>
-                <input
-                  required
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full rounded-xl border border-white/10 bg-bg/60 px-4 py-3 text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20"
-                  placeholder="Your name"
-                />
+                <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full rounded-xl border border-white/10 bg-bg/60 px-4 py-3 text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20" placeholder="Your name" />
               </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-200">Email</label>
-                <input
-                  required
-                  type="email"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full rounded-xl border border-white/10 bg-bg/60 px-4 py-3 text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20"
-                  placeholder="you@company.com"
-                />
+                <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full rounded-xl border border-white/10 bg-bg/60 px-4 py-3 text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20" placeholder="you@company.com" />
               </div>
             </div>
             <div>
               <label className="mb-2 block text-sm font-medium text-slate-200">Message</label>
-              <textarea
-                required
-                rows={5}
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full resize-none rounded-xl border border-white/10 bg-bg/60 px-4 py-3 text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20"
-                placeholder="Hi Akash, we have an internship opportunity..."
-              />
+              <textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full resize-none rounded-xl border border-white/10 bg-bg/60 px-4 py-3 text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20" placeholder="Hi Akash, we have an internship opportunity..." />
             </div>
-            <button
-              type="submit"
-              disabled={sent}
-              className="btn-primary w-full justify-center disabled:opacity-70"
-            >
-              {sent ? (
-                <>
-                  <CheckCircle2 className="h-4 w-4" />
-                  Message sent — talk soon!
-                </>
-              ) : (
-                <>
-                  Send Message
-                  <Send className="h-4 w-4" />
-                </>
-              )}
+            <button type="submit" disabled={sent} className="btn-primary w-full justify-center disabled:opacity-70">
+              {sent ? (<><CheckCircle2 className="h-4 w-4" />Message sent — talk soon!</>) : (<>Send Message<Send className="h-4 w-4" /></>)}
             </button>
           </motion.form>
         </div>
