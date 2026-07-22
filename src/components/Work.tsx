@@ -30,7 +30,7 @@ function DifficultyBadge({ level }: { level: Project['difficulty'] }) {
   return <span className={`text-xs font-medium ${colors[level]}`}>{level}</span>
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
   return (
     <motion.article
       layout
@@ -71,17 +71,23 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </h3>
           <DifficultyBadge level={project.difficulty} />
         </div>
-        <p className="mt-2 text-sm leading-relaxed text-slate-400">{project.description}</p>
+        <p className="mt-1.5 text-sm text-slate-500">{project.tagline}</p>
+        <p className="mt-3 text-sm leading-relaxed text-slate-400">{project.description}</p>
 
-        <ul className="mt-4 space-y-1.5">
-          {project.highlights.slice(0, 3).map((h) => (
-            <li key={h} className="flex items-start gap-2 text-xs text-slate-400">
-              <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-cyan-400" />
-              {h}
-            </li>
-          ))}
-        </ul>
+        {/* Key Features */}
+        <div className="mt-4">
+          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-slate-500">Key Features</p>
+          <ul className="space-y-1.5">
+            {project.highlights.slice(0, 3).map((h) => (
+              <li key={h} className="flex items-start gap-2 text-xs text-slate-400">
+                <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-cyan-400" />
+                {h}
+              </li>
+            ))}
+          </ul>
+        </div>
 
+        {/* Tech badges */}
         <div className="mt-5 flex flex-wrap gap-1.5">
           {project.tech.map((t) => (
             <span
@@ -93,6 +99,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           ))}
         </div>
 
+        {/* Actions */}
         <div className="mt-6 flex items-center gap-2 border-t border-white/5 pt-5">
           <a
             href={project.demo}
@@ -113,7 +120,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             Code
           </a>
           <button
-            className="ml-auto inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium text-cyan-400 transition-all hover:bg-cyan-400/10"
+            onClick={onOpen}
+            className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 px-3 py-2 text-xs font-medium text-cyan-400 transition-all hover:from-blue-600/30 hover:to-purple-600/30"
           >
             <BookOpen className="h-3.5 w-3.5" />
             Case Study
@@ -125,7 +133,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   )
 }
 
-export default function Work() {
+export default function Work({ onOpenCaseStudy }: { onOpenCaseStudy: (id: string) => void }) {
   const [filter, setFilter] = useState<(typeof categories)[number]>('All')
   const { ref, inView } = useInView<HTMLDivElement>()
   const filtered = filter === 'All' ? projects : projects.filter((p) => p.category === filter)
@@ -167,7 +175,7 @@ export default function Work() {
         <motion.div layout className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((p, i) => (
-              <ProjectCard key={p.id} project={p} index={i} />
+              <ProjectCard key={p.id} project={p} index={i} onOpen={() => onOpenCaseStudy(p.id)} />
             ))}
           </AnimatePresence>
         </motion.div>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
-import { skillCategories } from '../data'
+import { skillGroups } from '../data'
 
 export default function Skills() {
   const { ref, inView } = useInView<HTMLDivElement>()
@@ -21,18 +21,18 @@ export default function Skills() {
           </span>
           <h2 className="section-title text-balance">My engineering toolkit.</h2>
           <p className="mt-4 max-w-2xl text-slate-400">
-            Technologies I use to design, build, and ship software — from frontend
-            interfaces to backend systems and databases.
+            Technologies I use to design, build, and ship software — from frontend interfaces to
+            backend systems, databases, and AI-powered tooling.
           </p>
         </motion.div>
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {skillCategories.map((cat, i) => (
+          {skillGroups.map((cat, i) => (
             <motion.div
               key={cat.id}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="gradient-border group relative overflow-hidden p-6 transition-all duration-300 hover:scale-[1.02]"
             >
               <div
@@ -47,22 +47,27 @@ export default function Skills() {
                 >
                   {cat.icon}
                 </span>
-                <div>
-                  <h3 className="font-display text-lg font-semibold text-white">{cat.label}</h3>
-                </div>
+                <h3 className="font-display text-lg font-semibold text-white">{cat.label}</h3>
               </div>
 
-              <div className="relative mt-5 flex flex-wrap gap-2">
+              {/* Animated progress bars */}
+              <div className="relative mt-6 space-y-3.5">
                 {cat.skills.map((skill, idx) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.3 + i * 0.1 + idx * 0.05 }}
-                    className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-300 transition-all duration-300 hover:border-white/20 hover:text-white"
-                  >
-                    {skill}
-                  </motion.span>
+                  <div key={skill.name}>
+                    <div className="mb-1.5 flex items-center justify-between text-xs">
+                      <span className="font-medium text-slate-300">{skill.name}</span>
+                      <span className="font-mono text-slate-500">{skill.level}%</span>
+                    </div>
+                    <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={inView ? { width: `${skill.level}%` } : {}}
+                        transition={{ duration: 1, delay: 0.3 + i * 0.08 + idx * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                        className="h-full rounded-full"
+                        style={{ background: `linear-gradient(90deg, ${cat.color}, ${cat.color}aa)` }}
+                      />
+                    </div>
+                  </div>
                 ))}
               </div>
             </motion.div>

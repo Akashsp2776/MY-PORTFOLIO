@@ -43,16 +43,16 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 sm:flex-row">
-          <p className="flex items-center gap-1.5 text-sm text-slate-500">
-            © {new Date().getFullYear()} Akash SP. Built with
+          <p className="flex flex-wrap items-center gap-1.5 text-sm text-slate-500">
+            Made with
             <Heart className="h-3.5 w-3.5 fill-purple-500 text-purple-500" />
-            using React, Tailwind & Framer Motion.
+            by AKASH SP · Built with React + Tailwind CSS + Framer Motion
           </p>
           <a
             href="#home"
             className="group flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-white"
           >
-            Back to top
+            Back to Top
             <span className="grid h-8 w-8 place-items-center rounded-full border border-white/10 transition-all duration-300 group-hover:border-cyan-400/50 group-hover:bg-cyan-400/10">
               <ArrowUp className="h-4 w-4" />
             </span>

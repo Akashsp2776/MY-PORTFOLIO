@@ -98,8 +98,10 @@
     background-image: linear-gradient(135deg, #60a5fa, #a855f7, #22d3ee);
   }
 
-  .magnetic {
-    @apply transition-transform duration-200 ease-out;
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
   }
 }
 
@@ -140,4 +142,18 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #3b82f6, #9333ea);
+}
+
+/* Mouse glow */
+.mouse-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s;
+  mix-blend-mode: screen;
 }

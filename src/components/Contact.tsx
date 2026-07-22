@@ -47,7 +47,22 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-5">
+        {/* Availability badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-emerald-400/20 bg-emerald-400/5 px-4 py-2"
+        >
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+          </span>
+          <span className="text-sm font-medium text-emerald-300">Available for internships — Summer/Fall 2026</span>
+        </motion.div>
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-5">
+          {/* Contact info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -74,6 +89,7 @@ export default function Contact() {
               ))}
             </div>
 
+            {/* Map placeholder */}
             <div id="map" className="gradient-border mt-3 overflow-hidden p-0">
               <div className="relative flex h-32 items-center justify-center bg-gradient-to-br from-blue-600/10 to-purple-600/10">
                 <div className="absolute inset-0 grid-bg opacity-30" />
@@ -85,6 +101,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
+          {/* Form */}
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 30 }}

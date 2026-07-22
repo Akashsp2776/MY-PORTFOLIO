@@ -43,6 +43,7 @@ export default function Navbar() {
             </span>
           </a>
 
+          {/* Desktop nav */}
           <div className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => (
               <a
@@ -105,11 +106,7 @@ export default function Navbar() {
                   {item.label}
                 </a>
               ))}
-              <a
-                href="#resume"
-                onClick={() => setOpen(false)}
-                className="btn-primary mt-2 justify-center"
-              >
+              <a href="#resume" onClick={() => setOpen(false)} className="btn-primary mt-2 justify-center">
                 <Download className="h-4 w-4" />
                 Download Resume
               </a>
