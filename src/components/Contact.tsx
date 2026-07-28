@@ -1,18 +1,31 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle2, Map } from 'lucide-react'
+import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle2, Map, Loader2, AlertCircle } from 'lucide-react'
 import { useInView } from '../hooks/useInView'
 import { personal } from '../data'
 
 export default function Contact() {
   const { ref, inView } = useInView<HTMLDivElement>()
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [form, setForm] = useState({ name: '', email: '', message: '' })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSent(true)
-    setTimeout(() => { setSent(false); setForm({ name: '', email: '', message: '' }) }, 3500)
+    setStatus('sending')
+    try {
+      const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/contact-notify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error('Request failed')
+      setStatus('sent')
+      setForm({ name: '', email: '', message: '' })
+      setTimeout(() => setStatus('idle'), 4000)
+    } catch {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 5000)
+    }
   }
 
   const contactItems = [
@@ -68,8 +81,8 @@ export default function Contact() {
               <label className="mb-2 block text-sm font-medium text-slate-200">Message</label>
               <textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full resize-none rounded-xl border border-white/10 bg-bg/60 px-4 py-3 text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20" placeholder="Hi Akash, we have an internship opportunity..." />
             </div>
-            <button type="submit" disabled={sent} className="btn-primary w-full justify-center disabled:opacity-70">
-              {sent ? (<><CheckCircle2 className="h-4 w-4" />Message sent — talk soon!</>) : (<>Send Message<Send className="h-4 w-4" /></>)}
+            <button type="submit" disabled={status === 'sending' || status === 'sent'} className="btn-primary w-full justify-center disabled:opacity-70">
+              {status === 'sent' ? (<><CheckCircle2 className="h-4 w-4" />Message sent — talk soon!</>) : status === 'sending' ? (<><Loader2 className="h-4 w-4 animate-spin" />Sending...</>) : status === 'error' ? (<><AlertCircle className="h-4 w-4" />Failed — try again</>) : (<>Send Message<Send className="h-4 w-4" /></>)}
             </button>
           </motion.form>
         </div>
