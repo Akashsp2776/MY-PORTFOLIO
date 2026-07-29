@@ -9,7 +9,7 @@ export const personal = {
   university: 'Presidency University, Bengaluru',
   tagline: 'Building software that solves real-world problems.',
   summary:
-    "I'm a second-year CSE student at Presidency University with strong skills in Java, C, and full-stack development. I've built impactful projects in AI and cybersecurity, including a secure voting system and an IoT-based water monitoring solution. I bring a solid foundation in coding, problem-solving, and a passion for using technology to drive real-world innovation.",
+    'CSE student at Presidency University focused on full-stack development and AI. I build production-ready web apps, secure systems, and IoT solutions — and I am open to 2026 software engineering internships.',
   roles: [
     'Computer Science Engineering Student',
     'Full Stack Developer',

@@ -50,6 +50,10 @@
   }
   .mask-fade-b { -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%); mask-image: linear-gradient(to bottom, black 50%, transparent 100%); }
   .mask-fade-edges { -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  @keyframes float-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
 }
 
 ::-webkit-scrollbar { width: 10px; }

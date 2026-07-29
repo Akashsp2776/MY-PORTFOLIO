@@ -1,31 +1,84 @@
-import { motion } from 'framer-motion'
-import { ArrowRight, Download, Github, Linkedin, Mail, Code2, Sparkles, Terminal, Cpu, Database, Bot } from 'lucide-react'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { useEffect } from 'react'
+import { ArrowRight, Download, Github, Linkedin, Mail, Code2, Sparkles, Terminal, Cpu, Database, Bot, MapPin } from 'lucide-react'
 import { personal } from '../data'
 import { useTypingEffect } from '../hooks/useTypingEffect'
 import ParticleField from './ParticleField'
 
 const floatingIcons = [
-  { icon: '⚛️', label: 'React', x: '8%', y: '18%', delay: 0 },
-  { icon: '☕', label: 'Java', x: '85%', y: '12%', delay: 0.5 },
-  { icon: '🐍', label: 'Python', x: '12%', y: '68%', delay: 1 },
-  { icon: '💚', label: 'Node', x: '82%', y: '62%', delay: 1.5 },
-  { icon: '⚡', label: 'JS', x: '48%', y: '6%', delay: 2 },
-  { icon: '🗄️', label: 'MongoDB', x: '90%', y: '42%', delay: 2.5 },
-  { icon: '🔗', label: 'Git', x: '4%', y: '42%', delay: 3 },
-  { icon: '🤖', label: 'AI', x: '45%', y: '82%', delay: 3.5 },
+  { icon: '⚛️', label: 'React', x: '6%', y: '16%', delay: 0 },
+  { icon: '☕', label: 'Java', x: '87%', y: '10%', delay: 0.5 },
+  { icon: '🐍', label: 'Python', x: '10%', y: '70%', delay: 1 },
+  { icon: '💚', label: 'Node', x: '84%', y: '64%', delay: 1.5 },
+  { icon: '⚡', label: 'JS', x: '47%', y: '4%', delay: 2 },
+  { icon: '🗄️', label: 'MongoDB', x: '92%', y: '40%', delay: 2.5 },
+  { icon: '🔗', label: 'Git', x: '2%', y: '44%', delay: 3 },
+  { icon: '🤖', label: 'AI', x: '43%', y: '84%', delay: 3.5 },
 ]
 
 const container = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.3 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
 }
 const item = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 }
 
+const stats = [
+  { value: '5+', label: 'Projects' },
+  { value: '3', label: 'Certifications' },
+  { value: '2nd', label: 'Year CSE' },
+  { value: '2026', label: 'Ready' },
+]
+
+function MagneticButton({ href, children, className }: { href: string; children: React.ReactNode; className: string }) {
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const sx = useSpring(mx, { stiffness: 200, damping: 15 })
+  const sy = useSpring(my, { stiffness: 200, damping: 15 })
+
+  const handleMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    mx.set((e.clientX - rect.left - rect.width / 2) / 4)
+    my.set((e.clientY - rect.top - rect.height / 2) / 4)
+  }
+  const handleLeave = () => { mx.set(0); my.set(0) }
+
+  return (
+    <motion.a
+      href={href}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      style={{ x: sx, y: sy }}
+      className={className}
+    >
+      {children}
+    </motion.a>
+  )
+}
+
 export default function Hero() {
   const typed = useTypingEffect(personal.roles)
+
+  const tiltX = useMotionValue(0)
+  const tiltY = useMotionValue(0)
+  const rTiltX = useSpring(tiltX, { stiffness: 150, damping: 20 })
+  const rTiltY = useSpring(tiltY, { stiffness: 150, damping: 20 })
+  const rotateX = useTransform(rTiltY, [-10, 10], [8, -8])
+  const rotateY = useTransform(rTiltX, [-10, 10], [-8, 8])
+
+  const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    tiltX.set(((e.clientX - rect.left) / rect.width - 0.5) * 20)
+    tiltY.set(((e.clientY - rect.top) / rect.height - 0.5) * 20)
+  }
+  const resetTilt = () => { tiltX.set(0); tiltY.set(0) }
+
+  useEffect(() => {
+    document.body.style.overflowX = 'hidden'
+    return () => { document.body.style.overflowX = '' }
+  }, [])
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
@@ -63,8 +116,11 @@ export default function Hero() {
               Open to Software Engineering & Full Stack Internships — 2026
             </span>
           </motion.div>
-          <motion.div variants={item} className="mb-3">
+          <motion.div variants={item} className="mb-3 flex items-center gap-2">
             <p className="font-mono text-sm text-cyan-400">Hi, I'm</p>
+            <span className="inline-flex items-center gap-1 font-mono text-xs text-slate-500">
+              <MapPin className="h-3 w-3" />Bengaluru, IN
+            </span>
           </motion.div>
           <motion.h1 variants={item} className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-8xl">
             AKASH <span className="text-gradient-blue">SP</span>
@@ -80,15 +136,15 @@ export default function Hero() {
             {personal.summary}
           </motion.p>
           <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-3">
-            <a href="#portfolio" className="btn-primary group">
+            <MagneticButton href="#portfolio" className="btn-primary group">
               View Engineering Portfolio
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a href="#resume" className="btn-ghost">
+            </MagneticButton>
+            <MagneticButton href="#resume" className="btn-ghost">
               <Download className="h-4 w-4" />
               Download Resume
-            </a>
-            <a href="#contact" className="btn-ghost">Contact Me</a>
+            </MagneticButton>
+            <MagneticButton href="#contact" className="btn-ghost">Contact Me</MagneticButton>
           </motion.div>
           <motion.div variants={item} className="mt-8 flex items-center gap-4">
             <span className="font-mono text-xs uppercase tracking-wider text-slate-500">Find me on</span>
@@ -102,25 +158,38 @@ export default function Hero() {
                   key={label}
                   href={href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   aria-label={label}
-                  className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-white"
+                  className="group grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-white hover:shadow-[0_8px_20px_-6px_rgba(124,58,237,0.5)]"
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </a>
               ))}
             </div>
           </motion.div>
+          <motion.div variants={item} className="mt-10 grid max-w-md grid-cols-4 gap-3">
+            {stats.map((s) => (
+              <div key={s.label} className="glass rounded-xl px-2 py-3 text-center">
+                <div className="font-display text-xl font-bold text-white sm:text-2xl">{s.value}</div>
+                <div className="mt-0.5 text-[10px] uppercase tracking-wider text-slate-500">{s.label}</div>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
 
-        {/* Right: developer visual */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="relative hidden flex-1 justify-center lg:flex"
+          style={{ perspective: 1000 }}
         >
-          <div className="relative h-[420px] w-[380px]">
+          <motion.div
+            onMouseMove={handleTilt}
+            onMouseLeave={resetTilt}
+            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+            className="relative h-[420px] w-[380px]"
+          >
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
@@ -143,6 +212,7 @@ export default function Hero() {
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute left-1/2 top-1/2 w-48 -translate-x-1/2 -translate-y-1/2"
+              style={{ transform: 'translateZ(40px)' }}
             >
               <div className="gradient-border p-5">
                 <div className="mb-3 flex items-center gap-2">
@@ -168,7 +238,7 @@ export default function Hero() {
               </div>
             </motion.div>
             <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-500/20 blur-3xl" />
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
