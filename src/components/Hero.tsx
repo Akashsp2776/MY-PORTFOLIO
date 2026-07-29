@@ -175,6 +175,24 @@ export default function Hero() {
               </div>
             ))}
           </motion.div>
+          <motion.div variants={item} className="mt-8 flex flex-wrap gap-2">
+            {[
+              { label: 'Skills', href: '#skills' },
+              { label: 'Portfolio', href: '#portfolio' },
+              { label: 'Certificates', href: '#certifications' },
+              { label: 'Education', href: '#education' },
+              { label: 'Contact', href: '#contact' },
+            ].map((q) => (
+              <a
+                key={q.label}
+                href={q.href}
+                className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-500/40 hover:bg-cyan-500/10 hover:text-cyan-300"
+              >
+                {q.label}
+                <ArrowRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" />
+              </a>
+            ))}
+          </motion.div>
         </motion.div>
 
         <motion.div
