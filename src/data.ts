@@ -64,7 +64,7 @@ export const projects: Project[] = [
     ],
     image: 'https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#7c3aed',
-    github: 'https://github.com/Akashsp2776?tab=repositories',
+    github: 'https://github.com/Akashsp2776/Secure-Voting-System',
     demo: '#',
     features: [
       'Secure user registration & login',
@@ -106,7 +106,7 @@ export const projects: Project[] = [
     ],
     image: 'https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#0891b2',
-    github: 'https://github.com/Akashsp2776?tab=repositories',
+    github: 'https://github.com/Akashsp2776/Water-Turbidity-Leakage-Detection',
     demo: '#',
     features: [
       'Live sensor data monitoring',
@@ -148,8 +148,8 @@ export const projects: Project[] = [
     ],
     image: 'https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#2563eb',
-    github: 'https://github.com/Akashsp2776?tab=repositories',
-    demo: '#',
+    github: 'https://github.com/Akashsp2776/student-teacher-booking-appointment',
+    demo: 'https://student-teacher-booking-appointment-delta.vercel.app',
     features: [
       'Teacher directory & selection',
       'Date picker with availability',
@@ -190,7 +190,7 @@ export const projects: Project[] = [
     ],
     image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#d97706',
-    github: 'https://github.com/Akashsp2776?tab=repositories',
+    github: 'https://github.com/Akashsp2776/Catering-Reservation-Ordering-System',
     demo: '#',
     features: [
       'Reservation form (event type, date, guest count)',
@@ -232,7 +232,7 @@ export const projects: Project[] = [
     ],
     image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#059669',
-    github: 'https://github.com/Akashsp2776?tab=repositories',
+    github: 'https://github.com/Akashsp2776/Interactive-Image-Slider',
     demo: '#',
     features: [
       'Auto-play with configurable interval',

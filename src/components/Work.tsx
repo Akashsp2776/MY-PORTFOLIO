@@ -48,8 +48,12 @@ function ProjectCard({ project, index, onOpen }: { project: Project; index: numb
           {project.tech.map((t) => (<span key={t} className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] font-medium text-slate-300">{t}</span>))}
         </div>
         <div className="mt-6 flex items-center gap-2 border-t border-white/5 pt-5">
-          <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-white/10 hover:text-white"><ExternalLink className="h-3.5 w-3.5" />Live Demo</a>
-          <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-white/10 hover:text-white"><Github className="h-3.5 w-3.5" />Code</a>
+          {project.demo && project.demo !== '#' ? (
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-white/10 hover:text-white"><ExternalLink className="h-3.5 w-3.5" />Live Demo</a>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-500"><ExternalLink className="h-3.5 w-3.5" />Coming Soon</span>
+          )}
+          <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-white/10 hover:text-white"><Github className="h-3.5 w-3.5" />View Project</a>
           <button onClick={onOpen} className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 px-3 py-2 text-xs font-medium text-cyan-400 transition-all hover:from-blue-600/30 hover:to-purple-600/30"><BookOpen className="h-3.5 w-3.5" />Case Study<ArrowUpRight className="h-3 w-3" /></button>
         </div>
       </div>

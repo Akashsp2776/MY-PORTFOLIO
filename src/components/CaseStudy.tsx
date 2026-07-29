@@ -17,8 +17,12 @@ export default function CaseStudy({ project, onBack }: { project: Project; onBac
               <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">{project.title}</h1>
               <p className="mt-3 max-w-2xl text-lg text-slate-300">{project.tagline}</p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
-                <a href={project.github} target="_blank" rel="noreferrer" className="btn-primary"><Github className="h-4 w-4" />GitHub Repository</a>
-                <a href={project.demo} target="_blank" rel="noreferrer" className="btn-ghost"><ExternalLink className="h-4 w-4" />Live Demo</a>
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-primary"><Github className="h-4 w-4" />GitHub Repository</a>
+                {project.demo && project.demo !== '#' ? (
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-ghost"><ExternalLink className="h-4 w-4" />Live Demo</a>
+                ) : (
+                  <span className="btn-ghost cursor-not-allowed opacity-50"><ExternalLink className="h-4 w-4" />Coming Soon</span>
+                )}
               </div>
             </motion.div>
           </div>
@@ -112,8 +116,12 @@ export default function CaseStudy({ project, onBack }: { project: Project; onBac
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/5 pt-8">
             <button onClick={onBack} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-slate-200 transition-all hover:border-white/20 hover:text-white"><ArrowLeft className="h-4 w-4" />Back to Portfolio</button>
             <div className="flex gap-3">
-              <a href={project.github} target="_blank" rel="noreferrer" className="btn-ghost"><Github className="h-4 w-4" />GitHub</a>
-              <a href={project.demo} target="_blank" rel="noreferrer" className="btn-primary"><ExternalLink className="h-4 w-4" />Live Demo</a>
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-ghost"><Github className="h-4 w-4" />GitHub</a>
+              {project.demo && project.demo !== '#' ? (
+                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-primary"><ExternalLink className="h-4 w-4" />Live Demo</a>
+              ) : (
+                <span className="btn-primary cursor-not-allowed opacity-50"><ExternalLink className="h-4 w-4" />Coming Soon</span>
+              )}
             </div>
           </div>
         </div>
