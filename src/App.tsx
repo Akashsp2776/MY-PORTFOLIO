@@ -8,15 +8,11 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
-import StatsCounter from './components/StatsCounter'
 import Work from './components/Work'
 import CaseStudy from './components/CaseStudy'
-import CurrentlyBuilding from './components/CurrentlyBuilding'
-import TechJourney from './components/TechJourney'
-import GitHubStats from './components/GitHubStats'
-import Experience from './components/Experience'
 import Certifications from './components/Certifications'
 import Education from './components/Education'
+import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { projects } from './data'
@@ -43,14 +39,10 @@ export default function App() {
             <Hero />
             <About />
             <Skills />
-            <StatsCounter />
             <Work onOpenCaseStudy={(id) => setCaseStudyId(id)} />
-            <CurrentlyBuilding />
-            <TechJourney />
-            <GitHubStats />
-            <Experience />
             <Certifications />
             <Education />
+            <Experience />
             <Contact />
           </main>
         )}
