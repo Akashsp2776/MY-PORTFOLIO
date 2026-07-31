@@ -28,7 +28,7 @@ export default function About() {
           <span className="eyebrow mb-6"><span className="h-px w-8 bg-cyan-400" />About Me</span>
           <h2 className="section-title text-balance max-w-3xl">A future software engineer who builds, learns, and ships.</h2>
           <p className="mt-6 max-w-3xl text-balance text-base leading-relaxed text-slate-400 sm:text-lg">
-            I am a second-year Computer Science Engineering student at Presidency University with hands-on experience in Java development, full-stack web engineering, and AI. Through internships, real-world projects in cybersecurity and IoT, and continuous self-driven learning, I have built a strong foundation in problem-solving and software craftsmanship. I am now seeking internships where I can contribute, grow, and build software that creates real impact.
+            I am a Computer Science Engineering student at Presidency University, Bengaluru, driven by a singular obsession — building software that works, scales, and matters. What sets me apart is not the coursework on my transcript but the hours I have spent outside of it: architecting a cryptographically secure voting system, engineering an IoT pipeline that monitors water quality in real time, and shipping full-stack web applications used by real people. I do not wait for permission to build. I learn by doing, I ship by habit, and I treat every bug as a puzzle worth solving. I am actively seeking a Software Engineering internship where I can bring this builder's mindset to a team that ships products people rely on.
           </p>
         </motion.div>
 
