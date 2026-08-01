@@ -15,6 +15,9 @@ import Education from './components/Education'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import GridFloor from './components/GridFloor'
+import AuroraOrbs from './components/AuroraOrbs'
+import Floating3DShape from './components/Floating3DShape'
 import { projects } from './data'
 
 export default function App() {
@@ -26,8 +29,11 @@ export default function App() {
   }, [caseStudyId])
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="noise-overlay relative min-h-screen overflow-x-hidden">
       <Loader />
+      <AuroraOrbs />
+      <GridFloor />
+      <Floating3DShape />
       <MouseGlow />
       <ScrollProgress />
       <Navbar />
@@ -35,7 +41,7 @@ export default function App() {
         {activeProject ? (
           <CaseStudy key="case-study" project={activeProject} onBack={() => setCaseStudyId(null)} />
         ) : (
-          <main key="main">
+          <main key="main" className="relative z-10">
             <Hero />
             <About />
             <Skills />

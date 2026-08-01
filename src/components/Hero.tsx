@@ -125,7 +125,7 @@ export default function Hero() {
             </span>
           </motion.div>
           <motion.h1 variants={item} className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-8xl">
-            AKASH <span className="text-gradient-blue">SP</span>
+            AKASH <span className="text-gradient-blue animate-aurora-text">SP</span>
           </motion.h1>
           <motion.div variants={item} className="mt-5 flex items-center gap-3">
             <Code2 className="h-5 w-5 shrink-0 text-purple-400" />
