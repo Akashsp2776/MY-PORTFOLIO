@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Github, ExternalLink, BookOpen, CheckCircle2, AlertCircle, Zap } from 'lucide-react'
 import { projects, type Project } from '../data'
 import { useInView } from '../hooks/useInView'
+import TiltCard from './TiltCard'
 
 const categories = ['All', 'Web', 'Security', 'IoT', 'UI'] as const
 
@@ -23,15 +24,16 @@ function DifficultyBadge({ level }: { level: Project['difficulty'] }) {
 
 function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
   return (
-    <motion.article layout initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }} className="gradient-border group relative overflow-hidden">
+    <motion.article layout initial={{ opacity: 0, y: 30, rotateX: -12 }} animate={{ opacity: 1, y: 0, rotateX: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
+      <TiltCard maxTilt={9} scale={1.03} className="gradient-border group relative h-full overflow-hidden transition-shadow duration-300 hover:card-3d-shadow-hover">
       <div className="relative aspect-[16/10] overflow-hidden rounded-t-2xl">
         <img src={project.image} alt={project.title} loading="lazy" className="h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to top, #050816, rgba(5,8,22,0.3) 50%, transparent)` }} />
         <div className="absolute inset-0 opacity-30 mix-blend-overlay" style={{ background: `radial-gradient(circle at 50% 50%, ${project.accent}, transparent 70%)` }} />
-        <div className="absolute left-4 top-4 flex items-center gap-2"><span className="chip backdrop-blur-md">{project.category}</span></div>
-        <div className="absolute right-4 top-4"><StatusBadge status={project.status} /></div>
+        <div className="absolute left-4 top-4 flex items-center gap-2" style={{ transform: 'translateZ(30px)' }}><span className="chip backdrop-blur-md">{project.category}</span></div>
+        <div className="absolute right-4 top-4" style={{ transform: 'translateZ(30px)' }}><StatusBadge status={project.status} /></div>
       </div>
-      <div className="p-6">
+      <div className="p-6" style={{ transform: 'translateZ(20px)', transformStyle: 'preserve-3d' }}>
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-display text-xl font-semibold text-white transition-colors group-hover:text-cyan-300">{project.title}</h3>
           <DifficultyBadge level={project.difficulty} />
@@ -57,6 +59,7 @@ function ProjectCard({ project, index, onOpen }: { project: Project; index: numb
           <button onClick={onOpen} className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 px-3 py-2 text-xs font-medium text-cyan-400 transition-all hover:from-blue-600/30 hover:to-purple-600/30"><BookOpen className="h-3.5 w-3.5" />Case Study<ArrowUpRight className="h-3 w-3" /></button>
         </div>
       </div>
+      </TiltCard>
     </motion.article>
   )
 }

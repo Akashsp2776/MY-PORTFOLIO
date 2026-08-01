@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import { learningJourney } from '../data'
+import TiltCard from './TiltCard'
 
 const storyPoints = [
   { title: 'Passion for Software Engineering', text: 'I love the craft of turning ideas into working systems. From writing my first C program to building full-stack applications, every line of code reinforces my drive to create software that matters.', color: '#2563eb' },
@@ -34,10 +35,12 @@ export default function About() {
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {storyPoints.map((sp, i) => (
-            <motion.div key={sp.title} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }} className="gradient-border group p-6 transition-all duration-300 hover:scale-[1.02]">
-              <div className="mb-4 h-1 w-10 rounded-full" style={{ background: sp.color }} />
-              <h3 className="font-display text-lg font-semibold text-white">{sp.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">{sp.text}</p>
+            <motion.div key={sp.title} initial={{ opacity: 0, y: 30, rotateX: -15 }} animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
+              <TiltCard maxTilt={10} scale={1.04} className="gradient-border group h-full p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
+                <div className="mb-4 h-1 w-10 rounded-full" style={{ background: sp.color }} />
+                <h3 className="font-display text-lg font-semibold text-white">{sp.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">{sp.text}</p>
+              </TiltCard>
             </motion.div>
           ))}
         </div>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle2, Map, Loader2, AlertCircle } from 'lucide-react'
 import { useInView } from '../hooks/useInView'
 import { personal } from '../data'
+import TiltCard from './TiltCard'
 
 const WEBHOOK_URL = 'https://eotbnnriklxmd6r.m.pipedream.net'
 
@@ -74,11 +75,15 @@ export default function Contact() {
         <div className="mt-12 grid gap-6 lg:grid-cols-5">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }} className="lg:col-span-2">
             <div className="space-y-3">
-              {contactItems.map(({ icon: Icon, label, value, href }) => (
-                <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined} className="gradient-border group flex items-center gap-4 p-4 transition-all duration-300 hover:scale-[1.02]">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 text-cyan-400"><Icon className="h-5 w-5" /></span>
-                  <div className="min-w-0"><div className="text-xs uppercase tracking-wider text-slate-500">{label}</div><div className="truncate text-sm font-medium text-slate-200 group-hover:text-white">{value}</div></div>
-                </a>
+              {contactItems.map(({ icon: Icon, label, value, href }, i) => (
+                <motion.div key={label} initial={{ opacity: 0, x: -20, rotateY: 15 }} animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : {}} transition={{ duration: 0.5, delay: 0.1 + i * 0.06 }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
+                  <TiltCard maxTilt={8} scale={1.03} className="h-full">
+                    <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined} className="gradient-border group flex items-center gap-4 p-4 transition-shadow duration-300 hover:card-3d-shadow-hover">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 text-cyan-400" style={{ transform: 'translateZ(20px)' }}><Icon className="h-5 w-5" /></span>
+                      <div className="min-w-0" style={{ transform: 'translateZ(15px)' }}><div className="text-xs uppercase tracking-wider text-slate-500">{label}</div><div className="truncate text-sm font-medium text-slate-200 group-hover:text-white">{value}</div></div>
+                    </a>
+                  </TiltCard>
+                </motion.div>
               ))}
             </div>
             <div id="map" className="gradient-border mt-3 overflow-hidden p-0">

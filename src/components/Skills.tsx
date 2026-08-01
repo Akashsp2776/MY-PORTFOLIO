@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
 import { skillGroups } from '../data'
+import TiltCard from './TiltCard'
 
 export default function Skills() {
   const { ref, inView } = useInView<HTMLDivElement>()
@@ -16,25 +17,27 @@ export default function Skills() {
         </motion.div>
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((cat, i) => (
-            <motion.div key={cat.id} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }} className="gradient-border group relative overflow-hidden p-6 transition-all duration-300 hover:scale-[1.02]">
-              <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: cat.glow }} />
-              <div className="relative flex items-center gap-3">
-                <span className="grid h-12 w-12 place-items-center rounded-xl text-2xl" style={{ background: `${cat.color}20`, border: `1px solid ${cat.color}40` }}>{cat.icon}</span>
-                <h3 className="font-display text-lg font-semibold text-white">{cat.label}</h3>
-              </div>
-              <div className="relative mt-6 space-y-3.5">
-                {cat.skills.map((skill, idx) => (
-                  <div key={skill.name}>
-                    <div className="mb-1.5 flex items-center justify-between text-xs">
-                      <span className="font-medium text-slate-300">{skill.name}</span>
-                      <span className="font-mono text-slate-500">{skill.level}%</span>
+            <motion.div key={cat.id} initial={{ opacity: 0, y: 30, rotateX: -10 }} animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
+              <TiltCard maxTilt={8} scale={1.03} className="gradient-border group relative overflow-hidden p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
+                <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: cat.glow }} />
+                <div className="relative flex items-center gap-3" style={{ transform: 'translateZ(30px)', transformStyle: 'preserve-3d' }}>
+                  <span className="grid h-12 w-12 place-items-center rounded-xl text-2xl" style={{ background: `${cat.color}20`, border: `1px solid ${cat.color}40` }}>{cat.icon}</span>
+                  <h3 className="font-display text-lg font-semibold text-white">{cat.label}</h3>
+                </div>
+                <div className="relative mt-6 space-y-3.5" style={{ transform: 'translateZ(20px)', transformStyle: 'preserve-3d' }}>
+                  {cat.skills.map((skill, idx) => (
+                    <div key={skill.name}>
+                      <div className="mb-1.5 flex items-center justify-between text-xs">
+                        <span className="font-medium text-slate-300">{skill.name}</span>
+                        <span className="font-mono text-slate-500">{skill.level}%</span>
+                      </div>
+                      <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
+                        <motion.div initial={{ width: 0 }} animate={inView ? { width: `${skill.level}%` } : {}} transition={{ duration: 1, delay: 0.3 + i * 0.08 + idx * 0.05, ease: [0.22, 1, 0.36, 1] }} className="h-full rounded-full" style={{ background: `linear-gradient(90deg, ${cat.color}, ${cat.color}aa)` }} />
+                      </div>
                     </div>
-                    <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
-                      <motion.div initial={{ width: 0 }} animate={inView ? { width: `${skill.level}%` } : {}} transition={{ duration: 1, delay: 0.3 + i * 0.08 + idx * 0.05, ease: [0.22, 1, 0.36, 1] }} className="h-full rounded-full" style={{ background: `linear-gradient(90deg, ${cat.color}, ${cat.color}aa)` }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </TiltCard>
             </motion.div>
           ))}
         </div>
