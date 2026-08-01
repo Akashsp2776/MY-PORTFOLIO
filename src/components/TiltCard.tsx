@@ -1,5 +1,5 @@
 import { useRef, type ReactNode } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from 'framer-motion'
 
 interface TiltCardProps {
   children: ReactNode
@@ -20,6 +20,7 @@ export default function TiltCard({ children, className = '', maxTilt = 12, scale
 
   const glareX = useTransform(mx, [0, 1], ['0%', '100%'])
   const glareY = useTransform(my, [0, 1], ['0%', '100%'])
+  const glareBg = useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.15), transparent 50%)`
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -47,7 +48,7 @@ export default function TiltCard({ children, className = '', maxTilt = 12, scale
       </div>
       {glare && (
         <motion.div
-          style={{ background: useTransform([glareX, glareY], ([x, y]) => `radial-gradient(circle at ${x} ${y}, rgba(255,255,255,0.15), transparent 50%)`) }}
+          style={{ background: glareBg }}
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
         />
       )}

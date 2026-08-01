@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion'
 import { useEffect } from 'react'
 import { ArrowRight, Download, Github, Linkedin, Mail, Code2, Sparkles, Terminal, Cpu, Database, Bot, MapPin } from 'lucide-react'
 import { personal } from '../data'
@@ -68,6 +68,13 @@ export default function Hero() {
   const rotateX = useTransform(rTiltY, [-10, 10], [8, -8])
   const rotateY = useTransform(rTiltX, [-10, 10], [-8, 8])
 
+  const { scrollY } = useScroll()
+  const yGlow1 = useTransform(scrollY, [0, 600], [0, 120])
+  const yGlow2 = useTransform(scrollY, [0, 600], [0, -80])
+  const yIcons = useTransform(scrollY, [0, 500], [0, 60])
+  const yCard = useTransform(scrollY, [0, 600], [0, -40])
+  const opacityHero = useTransform(scrollY, [0, 500], [1, 0.4])
+
   const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     tiltX.set(((e.clientX - rect.left) / rect.width - 0.5) * 20)
@@ -84,17 +91,18 @@ export default function Hero() {
     <section id="home" className="relative min-h-screen overflow-hidden">
       <div className="absolute inset-0 opacity-70"><ParticleField density={50} /></div>
       <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-b opacity-40" />
-      <div className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px] animate-float-slow" />
-      <div className="pointer-events-none absolute right-0 top-40 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px] animate-float" />
+      <motion.div style={{ y: yGlow1 }} className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px] animate-float-slow" />
+      <motion.div style={{ y: yGlow2 }} className="pointer-events-none absolute right-0 top-40 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px] animate-float" />
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[100px]" />
 
+      <motion.div style={{ y: yIcons }} className="pointer-events-none absolute inset-0 hidden lg:block">
       {floatingIcons.map((fi) => (
         <motion.div
           key={fi.label}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1 + fi.delay * 0.2, duration: 0.5 }}
-          className="pointer-events-none absolute hidden lg:block"
+          className="pointer-events-none absolute"
           style={{ left: fi.x, top: fi.y }}
         >
           <motion.div
@@ -107,8 +115,9 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       ))}
+      </motion.div>
 
-      <div className="relative px-container mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-12 pt-28 pb-16 lg:flex-row">
+      <motion.div style={{ opacity: opacityHero }} className="relative px-container mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-12 pt-28 pb-16 lg:flex-row">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-2xl flex-1">
           <motion.div variants={item} className="mb-6">
             <span className="chip">
@@ -200,7 +209,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="relative hidden flex-1 justify-center lg:flex"
-          style={{ perspective: 1000 }}
+          style={{ perspective: 1000, y: yCard }}
         >
           <motion.div
             onMouseMove={handleTilt}
@@ -258,7 +267,7 @@ export default function Hero() {
             <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-500/20 blur-3xl" />
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}
