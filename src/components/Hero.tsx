@@ -25,13 +25,6 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 }
 
-const stats = [
-  { value: '5+', label: 'Projects' },
-  { value: '3', label: 'Certifications' },
-  { value: '2nd', label: 'Year CSE' },
-  { value: '2026', label: 'Ready' },
-]
-
 function MagneticButton({ href, children, className }: { href: string; children: React.ReactNode; className: string }) {
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
@@ -175,14 +168,6 @@ export default function Hero() {
                 </a>
               ))}
             </div>
-          </motion.div>
-          <motion.div variants={item} className="mt-10 grid max-w-md grid-cols-4 gap-3">
-            {stats.map((s) => (
-              <div key={s.label} className="glass rounded-xl px-2 py-3 text-center">
-                <div className="font-display text-xl font-bold text-white sm:text-2xl">{s.value}</div>
-                <div className="mt-0.5 text-[10px] uppercase tracking-wider text-slate-500">{s.label}</div>
-              </div>
-            ))}
           </motion.div>
           <motion.div variants={item} className="mt-8 flex flex-wrap gap-2">
             {[

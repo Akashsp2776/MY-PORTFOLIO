@@ -191,7 +191,7 @@ export const projects: Project[] = [
     image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200',
     accent: '#d97706',
     github: 'https://github.com/Akashsp2776/Catering-Reservation-Ordering-System',
-    demo: '#',
+    demo: 'https://catering-reservation-and-ordering-s-five.vercel.app/',
     features: [
       'Reservation form (event type, date, guest count)',
       'Food ordering with quantity controls',
