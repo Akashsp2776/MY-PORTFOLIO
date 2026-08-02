@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
+  const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
     if (window.matchMedia('(pointer: coarse)').matches) return
@@ -22,8 +23,8 @@ export default function CustomCursor() {
     }
 
     const animate = () => {
-      ringX += (mouseX - ringX) * 0.18
-      ringY += (mouseY - ringY) * 0.18
+      ringX += (mouseX - ringX) * 0.15
+      ringY += (mouseY - ringY) * 0.15
       if (ringRef.current) {
         ringRef.current.style.transform = `translate(${ringX - 18}px, ${ringY - 18}px)`
       }
@@ -34,13 +35,13 @@ export default function CustomCursor() {
     const onOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       if (target.closest('a, button, input, textarea, [data-hover]')) {
-        ringRef.current?.classList.add('hovering')
+        setHovering(true)
       }
     }
     const onOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       if (target.closest('a, button, input, textarea, [data-hover]')) {
-        ringRef.current?.classList.remove('hovering')
+        setHovering(false)
       }
     }
 
@@ -59,7 +60,10 @@ export default function CustomCursor() {
   return (
     <>
       <div ref={dotRef} className="cursor-dot" />
-      <div ref={ringRef} className="cursor-ring" />
+      <div
+        ref={ringRef}
+        className={`cursor-ring ${hovering ? 'cursor-ring-hover' : ''}`}
+      />
     </>
   )
 }

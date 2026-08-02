@@ -29,21 +29,20 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
       className="fixed inset-x-0 top-0 z-50"
     >
-      <div className={`transition-all duration-500 ${scrolled ? 'glass border-b border-white/5' : 'bg-transparent'}`}>
+      <div className={`transition-all duration-500 ${scrolled ? 'glass-strong border-b border-white/5' : 'bg-transparent'}`}>
         <nav className="px-container mx-auto flex max-w-7xl items-center justify-between py-4">
           <a href="#home" className="group flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 font-mono text-sm font-bold text-white shadow-lg shadow-purple-600/30 transition-transform duration-300 group-hover:scale-110">
+            <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 font-mono text-sm font-bold text-white shadow-lg shadow-purple-600/30 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
               &lt;/&gt;
             </span>
             <span className="font-display text-lg font-semibold tracking-tight text-white">
-              Akash<span className="text-gradient-blue">.SP</span>
+              Akash<span className="text-gradient-blue animate-aurora-text">.SP</span>
             </span>
           </a>
 
-          {/* Desktop nav */}
           <div className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => (
               <a
@@ -56,7 +55,7 @@ export default function Navbar() {
                 {active === item.href.slice(1) && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full bg-white/10"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 ring-1 ring-purple-500/30"
                     transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                   />
                 )}
@@ -68,14 +67,14 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <a
               href="#resume"
-              className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_20px_-5px_rgba(124,58,237,0.6)] sm:inline-flex"
+              className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_25px_-5px_rgba(124,58,237,0.6)] hover:scale-105 sm:inline-flex"
             >
               <Download className="h-4 w-4" />
               Resume
             </a>
             <button
               onClick={() => setOpen((v) => !v)}
-              className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 text-white lg:hidden"
+              className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 text-white transition-colors hover:bg-white/5 lg:hidden"
               aria-label="Menu"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -91,7 +90,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="glass overflow-hidden border-b border-white/5 lg:hidden"
+            className="glass-strong overflow-hidden border-b border-white/5 lg:hidden"
           >
             <div className="px-container mx-auto flex max-w-7xl flex-col gap-1 py-4">
               {navItems.map((item) => (
@@ -99,7 +98,7 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className={`rounded-xl px-4 py-3 text-base font-medium ${
+                  className={`rounded-xl px-4 py-3 text-base font-medium transition-colors ${
                     active === item.href.slice(1) ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/5'
                   }`}
                 >

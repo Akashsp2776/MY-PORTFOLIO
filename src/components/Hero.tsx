@@ -1,9 +1,9 @@
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion'
 import { useEffect } from 'react'
-import { ArrowRight, Download, Github, Linkedin, Mail, Code2, Sparkles, Terminal, Cpu, Database, Bot, MapPin } from 'lucide-react'
+import { ArrowRight, Download, Github, Linkedin, Mail, Code2, Sparkles, MapPin, Terminal, Cpu, Database, Bot } from 'lucide-react'
 import { personal } from '../data'
 import { useTypingEffect } from '../hooks/useTypingEffect'
-import ParticleField from './ParticleField'
+import StarField from './StarField'
 
 const floatingIcons = [
   { icon: '⚛️', label: 'React', x: '6%', y: '16%', delay: 0 },
@@ -21,8 +21,8 @@ const container = {
   show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
 }
 const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 24, filter: 'blur(8px)' },
+  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 }
 
 function MagneticButton({ href, children, className }: { href: string; children: React.ReactNode; className: string }) {
@@ -45,6 +45,7 @@ function MagneticButton({ href, children, className }: { href: string; children:
       onMouseLeave={handleLeave}
       style={{ x: sx, y: sy }}
       className={className}
+      data-hover
     >
       {children}
     </motion.a>
@@ -82,8 +83,8 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 opacity-70"><ParticleField density={50} /></div>
-      <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-b opacity-40" />
+      <div className="absolute inset-0 opacity-60"><StarField /></div>
+      <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-b opacity-30" />
       <motion.div style={{ y: yGlow1 }} className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px] animate-float-slow" />
       <motion.div style={{ y: yGlow2 }} className="pointer-events-none absolute right-0 top-40 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px] animate-float" />
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[100px]" />
@@ -113,7 +114,7 @@ export default function Hero() {
       <motion.div style={{ opacity: opacityHero }} className="relative px-container mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-12 pt-28 pb-16 lg:flex-row">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-2xl flex-1">
           <motion.div variants={item} className="mb-6">
-            <span className="chip">
+            <span className="chip animate-glow-pulse">
               <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
               Open to Software Engineering & Full Stack Internships — 2026
             </span>
@@ -162,6 +163,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
+                  data-hover
                   className="group grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-white hover:shadow-[0_8px_20px_-6px_rgba(124,58,237,0.5)]"
                 >
                   <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
@@ -180,6 +182,7 @@ export default function Hero() {
               <a
                 key={q.label}
                 href={q.href}
+                data-hover
                 className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-500/40 hover:bg-cyan-500/10 hover:text-cyan-300"
               >
                 {q.label}
@@ -190,8 +193,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="relative hidden flex-1 justify-center lg:flex"
           style={{ perspective: 1000, y: yCard }}
@@ -226,7 +229,7 @@ export default function Hero() {
               className="absolute left-1/2 top-1/2 w-48 -translate-x-1/2 -translate-y-1/2"
               style={{ transform: 'translateZ(40px)' }}
             >
-              <div className="gradient-border p-5">
+              <div className="gradient-border-animated p-5">
                 <div className="mb-3 flex items-center gap-2">
                   <Terminal className="h-4 w-4 text-cyan-400" />
                   <span className="font-mono text-xs text-slate-400">developer.ts</span>

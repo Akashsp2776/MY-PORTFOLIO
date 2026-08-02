@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Loader from './components/Loader'
+import CustomCursor from './components/CustomCursor'
 import MouseGlow from './components/MouseGlow'
 import ScrollProgress from './components/ScrollProgress'
 import BackToTop from './components/BackToTop'
@@ -15,9 +16,8 @@ import Education from './components/Education'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import GridFloor from './components/GridFloor'
+import Scene3D from './components/Scene3D'
 import AuroraOrbs from './components/AuroraOrbs'
-import Floating3DShape from './components/Floating3DShape'
 import { projects } from './data'
 
 export default function App() {
@@ -31,10 +31,10 @@ export default function App() {
   return (
     <div className="noise-overlay relative min-h-screen overflow-x-hidden">
       <Loader />
+      <Scene3D />
       <AuroraOrbs />
-      <GridFloor />
-      <Floating3DShape />
       <MouseGlow />
+      <CustomCursor />
       <ScrollProgress />
       <Navbar />
       <AnimatePresence mode="wait">
