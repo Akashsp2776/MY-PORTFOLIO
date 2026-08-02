@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Loader from './components/Loader'
-import CustomCursor from './components/CustomCursor'
 import MouseGlow from './components/MouseGlow'
 import ScrollProgress from './components/ScrollProgress'
 import BackToTop from './components/BackToTop'
@@ -34,7 +33,6 @@ export default function App() {
       <Scene3D />
       <AuroraOrbs />
       <MouseGlow />
-      <CustomCursor />
       <ScrollProgress />
       <Navbar />
       <AnimatePresence mode="wait">

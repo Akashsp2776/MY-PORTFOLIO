@@ -20,7 +20,7 @@ export default function Certifications() {
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {certifications.map((cert, i) => (
             <motion.div key={cert.id} initial={{ opacity: 0, y: 30, rotateX: -12, filter: 'blur(6px)' }} animate={inView ? { opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
-              <TiltCard maxTilt={10} scale={1.04} className="gradient-border group relative h-full overflow-hidden p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
+              <TiltCard maxTilt={3} scale={1.02} className="gradient-border group relative h-full overflow-hidden p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
                 <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: `${cert.color}40` }} />
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: `radial-gradient(circle at 50% 0%, ${cert.color}10, transparent 60%)` }} />
 

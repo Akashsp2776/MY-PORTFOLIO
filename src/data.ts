@@ -3,7 +3,7 @@ export const personal = {
   title: 'Computer Science Engineering Student',
   email: 'akashsp1971@gmail.com',
   phone: '+91 9686336227',
-  location: 'Tarikere, Chikkamagalur · Bengaluru, Karnataka',
+  location: 'Bengaluru, Karnataka',
   github: 'https://github.com/Akashsp2776?tab=repositories',
   linkedin: 'https://www.linkedin.com/in/akash-sp-648111297/',
   university: 'Presidency University, Bengaluru',
@@ -346,11 +346,9 @@ export const education = [
 
 export const certifications = [
   { id: 'c1', title: 'Certification of Excellence — Python', issuer: 'Great Learning', category: 'Programming', color: '#2563eb', icon: '🐍' },
-  { id: 'c2', title: 'Certification of Excellence — Java Programming', issuer: 'Great Learning', category: 'Programming', color: '#7c3aed', icon: '☕' },
   { id: 'c3', title: 'Certification of Distinction — Pre University Education', issuer: 'Academic Achievement', category: 'Academic', color: '#d97706', icon: '🏆' },
   { id: 'c4', title: 'AI Tools and ChatGPT', issuer: 'be10x', category: 'AI', color: '#0891b2', icon: '🤖' },
   { id: 'c5', title: 'What is Generative AI', issuer: 'Generative AI Certification', category: 'AI', color: '#059669', icon: '✨' },
-  { id: 'c6', title: 'Ethics in Generative AI', issuer: 'Generative AI Certification', category: 'AI', color: '#059669', icon: '⚖️' },
 ]
 
 export const techJourney = [

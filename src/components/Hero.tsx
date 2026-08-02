@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion'
+import { motion, useTransform, useScroll } from 'framer-motion'
 import { useEffect } from 'react'
 import { ArrowRight, Download, Github, Linkedin, Mail, Code2, Sparkles, MapPin, Terminal, Cpu, Database, Bot } from 'lucide-react'
 import { personal } from '../data'
@@ -25,42 +25,8 @@ const item = {
   show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 }
 
-function MagneticButton({ href, children, className }: { href: string; children: React.ReactNode; className: string }) {
-  const mx = useMotionValue(0)
-  const my = useMotionValue(0)
-  const sx = useSpring(mx, { stiffness: 200, damping: 15 })
-  const sy = useSpring(my, { stiffness: 200, damping: 15 })
-
-  const handleMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    mx.set((e.clientX - rect.left - rect.width / 2) / 4)
-    my.set((e.clientY - rect.top - rect.height / 2) / 4)
-  }
-  const handleLeave = () => { mx.set(0); my.set(0) }
-
-  return (
-    <motion.a
-      href={href}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      style={{ x: sx, y: sy }}
-      className={className}
-      data-hover
-    >
-      {children}
-    </motion.a>
-  )
-}
-
 export default function Hero() {
   const typed = useTypingEffect(personal.roles)
-
-  const tiltX = useMotionValue(0)
-  const tiltY = useMotionValue(0)
-  const rTiltX = useSpring(tiltX, { stiffness: 150, damping: 20 })
-  const rTiltY = useSpring(tiltY, { stiffness: 150, damping: 20 })
-  const rotateX = useTransform(rTiltY, [-10, 10], [8, -8])
-  const rotateY = useTransform(rTiltX, [-10, 10], [-8, 8])
 
   const { scrollY } = useScroll()
   const yGlow1 = useTransform(scrollY, [0, 600], [0, 120])
@@ -68,13 +34,6 @@ export default function Hero() {
   const yIcons = useTransform(scrollY, [0, 500], [0, 60])
   const yCard = useTransform(scrollY, [0, 600], [0, -40])
   const opacityHero = useTransform(scrollY, [0, 500], [1, 0.4])
-
-  const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    tiltX.set(((e.clientX - rect.left) / rect.width - 0.5) * 20)
-    tiltY.set(((e.clientY - rect.top) / rect.height - 0.5) * 20)
-  }
-  const resetTilt = () => { tiltX.set(0); tiltY.set(0) }
 
   useEffect(() => {
     document.body.style.overflowX = 'hidden'
@@ -122,7 +81,7 @@ export default function Hero() {
           <motion.div variants={item} className="mb-3 flex items-center gap-2">
             <p className="font-mono text-sm text-cyan-400">Hi, I'm</p>
             <span className="inline-flex items-center gap-1 font-mono text-xs text-slate-500">
-              <MapPin className="h-3 w-3" />Bengaluru, IN
+              <MapPin className="h-3 w-3" />Bengaluru, Karnataka
             </span>
           </motion.div>
           <motion.h1 variants={item} className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-8xl">
@@ -139,15 +98,15 @@ export default function Hero() {
             {personal.summary}
           </motion.p>
           <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-3">
-            <MagneticButton href="#portfolio" className="btn-primary group">
+            <a href="#portfolio" className="btn-primary group">
               View Engineering Portfolio
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </MagneticButton>
-            <MagneticButton href="#resume" className="btn-ghost">
+            </a>
+            <a href="#resume" className="btn-ghost">
               <Download className="h-4 w-4" />
               Download Resume
-            </MagneticButton>
-            <MagneticButton href="#contact" className="btn-ghost">Contact Me</MagneticButton>
+            </a>
+            <a href="#contact" className="btn-ghost">Contact Me</a>
           </motion.div>
           <motion.div variants={item} className="mt-8 flex items-center gap-4">
             <span className="font-mono text-xs uppercase tracking-wider text-slate-500">Find me on</span>
@@ -171,25 +130,7 @@ export default function Hero() {
               ))}
             </div>
           </motion.div>
-          <motion.div variants={item} className="mt-8 flex flex-wrap gap-2">
-            {[
-              { label: 'Skills', href: '#skills' },
-              { label: 'Portfolio', href: '#portfolio' },
-              { label: 'Certificates', href: '#certifications' },
-              { label: 'Education', href: '#education' },
-              { label: 'Contact', href: '#contact' },
-            ].map((q) => (
-              <a
-                key={q.label}
-                href={q.href}
-                data-hover
-                className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-500/40 hover:bg-cyan-500/10 hover:text-cyan-300"
-              >
-                {q.label}
-                <ArrowRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100" />
-              </a>
-            ))}
-          </motion.div>
+
         </motion.div>
 
         <motion.div
@@ -199,12 +140,7 @@ export default function Hero() {
           className="relative hidden flex-1 justify-center lg:flex"
           style={{ perspective: 1000, y: yCard }}
         >
-          <motion.div
-            onMouseMove={handleTilt}
-            onMouseLeave={resetTilt}
-            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-            className="relative h-[420px] w-[380px]"
-          >
+          <div className="relative h-[420px] w-[380px]">
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
@@ -253,7 +189,7 @@ export default function Hero() {
               </div>
             </motion.div>
             <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-500/20 blur-3xl" />
-          </motion.div>
+          </div>
         </motion.div>
       </motion.div>
 

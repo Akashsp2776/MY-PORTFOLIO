@@ -28,7 +28,7 @@ export default function Skills() {
               style={{ transformStyle: 'preserve-3d' }}
               className="perspective-1000"
             >
-              <TiltCard maxTilt={8} scale={1.03} className="gradient-border group relative overflow-hidden p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
+              <TiltCard maxTilt={3} scale={1.02} className="gradient-border group relative overflow-hidden p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
                 <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: cat.glow }} />
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: `radial-gradient(circle at 50% 0%, ${cat.color}10, transparent 60%)` }} />
 
@@ -73,19 +73,22 @@ export default function Skills() {
           initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
           animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="gradient-border mt-8 overflow-hidden p-8"
+          className="gradient-border mx-auto mt-8 max-w-3xl overflow-hidden p-6"
         >
-          <h3 className="mb-6 font-display text-lg font-semibold text-white">Technology Orbit</h3>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <h3 className="mb-4 flex items-center justify-center gap-2 font-display text-base font-semibold text-white">
+            <span className="h-px w-6 bg-gradient-to-r from-transparent to-cyan-400" />
+            Technology Orbit
+            <span className="h-px w-6 bg-gradient-to-l from-transparent to-cyan-400" />
+          </h3>
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {skillGroups.flatMap((g) => g.skills).map((skill, i) => (
               <motion.span
                 key={skill.name}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 0.5 + i * 0.03, type: 'spring', stiffness: 200 }}
-                whileHover={{ scale: 1.1, y: -4 }}
-                className="cursor-default rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-cyan-500/40 hover:bg-cyan-500/10 hover:text-cyan-300"
-                data-hover
+                transition={{ delay: 0.5 + i * 0.02, type: 'spring', stiffness: 200 }}
+                whileHover={{ scale: 1.08, y: -3 }}
+                className="cursor-default rounded-full border border-white/10 bg-gradient-to-r from-white/5 to-white/[0.02] px-3 py-1.5 text-xs font-medium text-slate-300 transition-colors hover:border-cyan-500/40 hover:bg-cyan-500/10 hover:text-cyan-300"
               >
                 {skill.name}
               </motion.span>

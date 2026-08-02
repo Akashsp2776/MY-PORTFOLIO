@@ -31,7 +31,7 @@ function StatCounter({ stat, index, start }: { stat: typeof stats[number]; index
       style={{ transformStyle: 'preserve-3d' }}
       className="perspective-1000"
     >
-      <TiltCard maxTilt={8} scale={1.05} className="gradient-border group relative overflow-hidden p-6 text-center transition-shadow duration-300 hover:card-3d-shadow-hover">
+      <TiltCard maxTilt={3} scale={1.02} className="gradient-border group relative overflow-hidden p-6 text-center transition-shadow duration-300 hover:card-3d-shadow-hover">
         <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(124,58,237,0.1), transparent 70%)' }} />
         <div className="relative font-display text-4xl font-bold text-gradient-blue animate-aurora-text" style={{ transform: 'translateZ(30px)' }}>
           {value}{stat.suffix}
@@ -64,7 +64,7 @@ export default function About() {
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {storyPoints.map((sp, i) => (
             <motion.div key={sp.title} initial={{ opacity: 0, y: 30, rotateX: -15 }} animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
-              <TiltCard maxTilt={10} scale={1.04} className="gradient-border group h-full p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
+              <TiltCard maxTilt={3} scale={1.02} className="gradient-border group h-full p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
                 <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: `${sp.color}30` }} />
                 <div className="relative mb-4 flex items-center gap-3" style={{ transform: 'translateZ(30px)' }}>
                   <span className="grid h-11 w-11 place-items-center rounded-xl" style={{ background: `${sp.color}20`, border: `1px solid ${sp.color}40` }}>

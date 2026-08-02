@@ -25,7 +25,7 @@ function DifficultyBadge({ level }: { level: Project['difficulty'] }) {
 function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
   return (
     <motion.article layout initial={{ opacity: 0, y: 30, rotateX: -12, filter: 'blur(6px)' }} animate={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
-      <TiltCard maxTilt={9} scale={1.03} className="gradient-border group relative h-full overflow-hidden transition-shadow duration-300 hover:card-3d-shadow-hover">
+      <TiltCard maxTilt={3} scale={1.01} className="gradient-border group relative h-full overflow-hidden transition-shadow duration-300 hover:card-3d-shadow-hover">
         <div className="relative aspect-[16/10] overflow-hidden rounded-t-2xl">
           <img src={project.image} alt={project.title} loading="lazy" className="h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-110 group-hover:opacity-100" />
           <div className="absolute inset-0" style={{ background: `linear-gradient(to top, #050816, rgba(5,8,22,0.3) 50%, transparent)` }} />

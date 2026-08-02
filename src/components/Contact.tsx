@@ -81,7 +81,7 @@ export default function Contact() {
             <div className="space-y-3">
               {contactItems.map(({ icon: Icon, label, value, href }, i) => (
                 <motion.div key={label} initial={{ opacity: 0, x: -20, rotateY: 15 }} animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : {}} transition={{ duration: 0.5, delay: 0.1 + i * 0.06 }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
-                  <TiltCard maxTilt={8} scale={1.03} className="h-full">
+                  <TiltCard maxTilt={3} scale={1.01} className="h-full">
                     <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined} data-hover className="gradient-border group flex items-center gap-4 p-4 transition-shadow duration-300 hover:card-3d-shadow-hover">
                       <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 text-cyan-400 transition-transform duration-300 group-hover:scale-110" style={{ transform: 'translateZ(20px)' }}><Icon className="h-5 w-5" /></span>
                       <div className="min-w-0" style={{ transform: 'translateZ(15px)' }}><div className="text-xs uppercase tracking-wider text-slate-500">{label}</div><div className="truncate text-sm font-medium text-slate-200 group-hover:text-white">{value}</div></div>

@@ -27,7 +27,7 @@ export default function Education() {
                 </div>
                 <div className={`ml-12 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
                   <motion.div style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
-                    <TiltCard maxTilt={8} scale={1.02} className="gradient-border group h-full p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
+                    <TiltCard maxTilt={3} scale={1.01} className="gradient-border group h-full p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
                       <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: `${edu.color}30` }} />
                       <div className={`flex items-center gap-2 ${i % 2 === 0 ? 'md:justify-end' : ''}`} style={{ transform: 'translateZ(30px)' }}>
                         <BookOpen className="h-4 w-4" style={{ color: edu.color }} />

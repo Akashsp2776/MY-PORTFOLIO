@@ -27,7 +27,7 @@ export default function Experience() {
                 </div>
                 <div className={`ml-12 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
                   <motion.div style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
-                    <TiltCard maxTilt={8} scale={1.02} className="gradient-border group relative overflow-hidden p-7 transition-shadow duration-300 hover:card-3d-shadow-hover">
+                    <TiltCard maxTilt={3} scale={1.01} className="gradient-border group relative overflow-hidden p-7 transition-shadow duration-300 hover:card-3d-shadow-hover">
                       <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: `${exp.color}40` }} />
                       <div className="relative flex items-start justify-between" style={{ transform: 'translateZ(30px)' }}>
                         <span className="grid h-12 w-12 place-items-center rounded-xl" style={{ background: `${exp.color}20`, border: `1px solid ${exp.color}40` }}>
