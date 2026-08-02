@@ -25,6 +25,16 @@ const item = {
   show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 }
 
+/* Animated spark particles that orbit around the name */
+const nameParticles = [
+  { size: 3, x: '-8%', y: '20%', delay: 0, dur: 3.2, color: '#22d3ee' },
+  { size: 2, x: '102%', y: '70%', delay: 0.6, dur: 4, color: '#818cf8' },
+  { size: 4, x: '50%', y: '-30%', delay: 1.1, dur: 3.6, color: '#38bdf8' },
+  { size: 2, x: '80%', y: '110%', delay: 1.8, dur: 4.4, color: '#a78bfa' },
+  { size: 3, x: '20%', y: '115%', delay: 0.4, dur: 3.8, color: '#22d3ee' },
+  { size: 2, x: '-5%', y: '80%', delay: 2.2, dur: 5, color: '#38bdf8' },
+]
+
 export default function Hero() {
   const typed = useTypingEffect(personal.roles)
 
@@ -75,18 +85,81 @@ export default function Hero() {
           <motion.div variants={item} className="mb-6">
             <span className="chip animate-glow-pulse">
               <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
-              Open to Software Engineering & Full Stack Internships — 2026
+              Available for Internships — 2026
             </span>
           </motion.div>
-          <motion.div variants={item} className="mb-3 flex items-center gap-2">
+          <motion.div variants={item} className="mb-4 flex items-center gap-2">
             <p className="font-mono text-sm text-cyan-400">Hi, I'm</p>
             <span className="inline-flex items-center gap-1 font-mono text-xs text-slate-500">
               <MapPin className="h-3 w-3" />Bengaluru, Karnataka
             </span>
           </motion.div>
-          <motion.h1 variants={item} className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-8xl">
-            AKASH <span className="text-gradient-blue animate-aurora-text">SP</span>
-          </motion.h1>
+
+          {/* ── NAME with animated background effects ── */}
+          <motion.div variants={item} className="relative mb-2">
+            {/* Blurred glow blobs behind the name */}
+            <div className="pointer-events-none absolute inset-0 -z-10 overflow-visible">
+              <motion.div
+                animate={{ scale: [1, 1.15, 1], opacity: [0.35, 0.55, 0.35] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -left-6 -top-4 h-28 w-56 rounded-full bg-cyan-500/25 blur-[40px]"
+              />
+              <motion.div
+                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+                className="absolute -right-4 top-0 h-24 w-44 rounded-full bg-blue-500/25 blur-[40px]"
+              />
+              <motion.div
+                animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1.6 }}
+                className="absolute left-1/4 -bottom-2 h-16 w-40 rounded-full bg-violet-500/20 blur-[35px]"
+              />
+            </div>
+
+            {/* Spark particles */}
+            {nameParticles.map((p, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: [0, 1, 0], scale: [0, 1, 0], y: [0, -18, -36] }}
+                transition={{ delay: 1.5 + p.delay, duration: p.dur, repeat: Infinity, ease: 'easeOut' }}
+                className="pointer-events-none absolute -z-10"
+                style={{ left: p.x, top: p.y }}
+              >
+                <div
+                  className="rounded-full"
+                  style={{ width: p.size * 2, height: p.size * 2, background: p.color, boxShadow: `0 0 ${p.size * 4}px ${p.color}` }}
+                />
+              </motion.div>
+            ))}
+
+            {/* Horizontal shimmer line under name */}
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="pointer-events-none absolute -bottom-1 left-0 h-px w-full origin-left"
+              style={{ background: 'linear-gradient(90deg, transparent, #22d3ee66, #818cf866, transparent)' }}
+            />
+
+            <h1 className="font-display text-6xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl md:text-[5.5rem]">
+              AKASH{' '}
+              <span
+                className="relative inline-block animate-aurora-text text-gradient-blue"
+                style={{ textShadow: '0 0 60px rgba(34,211,238,0.35), 0 0 120px rgba(99,102,241,0.2)' }}
+              >
+                SP
+                {/* letter-level glow ring */}
+                <motion.span
+                  animate={{ opacity: [0.4, 0.8, 0.4] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                  className="pointer-events-none absolute inset-0 -z-10 rounded-md blur-xl"
+                  style={{ background: 'linear-gradient(135deg, #22d3ee44, #818cf844)' }}
+                />
+              </span>
+            </h1>
+          </motion.div>
+
           <motion.div variants={item} className="mt-5 flex items-center gap-3">
             <Code2 className="h-5 w-5 shrink-0 text-purple-400" />
             <span className="font-mono text-base text-slate-300 sm:text-lg">
