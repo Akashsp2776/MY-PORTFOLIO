@@ -21,19 +21,8 @@ function DifficultyBadge({ level }: { level: Project['difficulty'] }) {
   return <span className={`text-xs font-medium ${colors[level] ?? 'text-slate-400'}`}>{level}</span>
 }
 
-// Layout variants: each card gets a slightly different visual treatment
-const layouts = [
-  'featured',   // large, image-left
-  'compact',    // tall, image-top
-  'wide',       // wide, image-right
-  'compact',
-  'featured',
-  'wide',
-] as const
-
-function ProjectCard({ project, index, layout, onOpen }: { project: Project; index: number; layout: string; onOpen: () => void }) {
-  const isFeatured = layout === 'featured'
-  const isWide = layout === 'wide'
+function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
+  const reversed = index % 2 === 1
 
   return (
     <motion.article
@@ -42,9 +31,7 @@ function ProjectCard({ project, index, layout, onOpen }: { project: Project; ind
       animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
       exit={{ opacity: 0, y: -20, scale: 0.96 }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-all duration-500 hover:border-white/20 hover:bg-white/[0.05] hover:shadow-[0_20px_60px_-15px_rgba(34,211,238,0.15)] ${
-        isFeatured ? 'sm:col-span-2 lg:col-span-2' : isWide ? 'sm:col-span-2' : ''
-      }`}
+      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-all duration-500 hover:border-white/20 hover:bg-white/[0.05] hover:shadow-[0_20px_60px_-15px_rgba(34,211,238,0.15)]"
     >
       {/* Animated gradient accent line on top */}
       <div className="absolute inset-x-0 top-0 h-px overflow-hidden">
@@ -58,16 +45,18 @@ function ProjectCard({ project, index, layout, onOpen }: { project: Project; ind
         />
       </div>
 
-      <div className={`flex flex-col ${isFeatured ? 'md:flex-row' : isWide ? 'sm:flex-row-reverse' : ''}`}>
+      <div className={`flex flex-col md:flex-row ${reversed ? 'md:flex-row-reverse' : ''}`}>
         {/* Image section */}
-        <div className={`relative overflow-hidden ${isFeatured ? 'md:w-1/2' : isWide ? 'sm:w-2/5' : 'w-full'} ${isFeatured || isWide ? '' : 'aspect-[16/10]'}`}>
-          <img
-            src={project.image}
-            alt={project.title}
-            loading="lazy"
-            className="h-full w-full object-cover opacity-70 transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
-          />
-          <div className="absolute inset-0" style={{ background: `linear-gradient(${isFeatured ? 'to right' : 'to top'}, #050816, rgba(5,8,22,0.3) 50%, transparent)` }} />
+        <div className="relative overflow-hidden md:w-2/5">
+          <div className="aspect-[16/10] md:h-full">
+            <img
+              src={project.image}
+              alt={project.title}
+              loading="lazy"
+              className="h-full w-full object-cover opacity-70 transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
+            />
+          </div>
+          <div className="absolute inset-0" style={{ background: `linear-gradient(${reversed ? 'to left' : 'to right'}, #050816, rgba(5,8,22,0.3) 50%, transparent)` }} />
           {/* Floating accent glow */}
           <motion.div
             animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.1, 1] }}
@@ -76,17 +65,17 @@ function ProjectCard({ project, index, layout, onOpen }: { project: Project; ind
             style={{ background: `radial-gradient(circle at 50% 50%, ${project.accent}33, transparent 70%)` }}
           />
           {/* Category chip */}
-          <div className="absolute left-4 top-4" style={{ transform: 'translateZ(20px)' }}>
+          <div className="absolute left-4 top-4">
             <span className="chip backdrop-blur-md">{project.category}</span>
           </div>
           {/* Status badge */}
-          <div className="absolute right-4 top-4" style={{ transform: 'translateZ(20px)' }}>
+          <div className="absolute right-4 top-4">
             <StatusBadge status={project.status} />
           </div>
         </div>
 
         {/* Content section */}
-        <div className={`flex flex-col p-6 ${isFeatured ? 'md:w-1/2 md:p-8' : isWide ? 'sm:w-3/5 sm:p-6' : ''}`}>
+        <div className="flex flex-col p-6 md:w-3/5 md:p-8">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-2">
               <span className="font-mono text-xs text-slate-500">0{index + 1}</span>
@@ -185,14 +174,13 @@ export default function Work({ onOpenCaseStudy }: { onOpenCaseStudy: (id: string
           </div>
         </motion.div>
 
-        <motion.div layout className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="mt-12 flex flex-col gap-6">
           <AnimatePresence mode="popLayout">
             {filtered.map((p, i) => (
               <ProjectCard
                 key={p.id}
                 project={p}
                 index={i}
-                layout={layouts[i % layouts.length]}
                 onOpen={() => onOpenCaseStudy(p.id)}
               />
             ))}
