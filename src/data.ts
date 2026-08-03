@@ -87,48 +87,6 @@ export const projects: Project[] = [
     architecture: 'Client → Python Flask Server → SQLite DB (SHA-256 hashed credentials)',
   },
   {
-    id: 'water-detection',
-    title: 'Water Turbidity & Leakage Detection',
-    tagline: 'IoT-powered real-time water quality monitoring across environments',
-    description:
-      'IoT system using Arduino and Raspberry Pi with Python and Java to monitor water quality and detect leakage in real time across industrial and smart-building environments.',
-    longDesc:
-      'A hardware-software IoT solution targeting water quality monitoring in treatment plants, industrial waste management, offices, smart buildings, and water tanks.',
-    tech: ['Arduino', 'Raspberry Pi', 'Python', 'Java', 'IoT', 'Sensors'],
-    category: 'IoT',
-    status: 'Completed',
-    difficulty: 'Advanced',
-    highlights: [
-      'Real-time turbidity & leakage detection',
-      'Arduino + Raspberry Pi hardware integration',
-      'Python & Java sensor data processing',
-      'Smart building IoT applications',
-    ],
-    image: 'https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    accent: '#0891b2',
-    github: 'https://github.com/Akashsp2776/Water-Turbidity-Leakage-Detection',
-    demo: '#',
-    features: [
-      'Live sensor data monitoring',
-      'Turbidity threshold alerts',
-      'Leakage detection algorithms',
-      'Multi-environment deployment',
-      'Data logging & reporting',
-    ],
-    challenges: [
-      { challenge: 'Hardware-software integration across platforms', solution: 'Used serial communication between Arduino and Raspberry Pi, with Python processing sensor data and Java handling alert logic.' },
-      { challenge: 'Sensor calibration for accuracy', solution: 'Implemented a calibration routine that baselined sensor readings against known water samples before deployment.' },
-    ],
-    learnings: ['IoT system architecture', 'Hardware-software interfacing', 'Real-time data processing'],
-    futureImprovements: ['Cloud dashboard for remote monitoring', 'Machine learning for predictive maintenance', 'Mobile app with push notifications'],
-    timeline: [
-      { phase: 'Hardware Setup', duration: '2 weeks' },
-      { phase: 'Software Development', duration: '3 weeks' },
-      { phase: 'Testing & Deployment', duration: '1 week' },
-    ],
-    architecture: 'Sensors → Arduino → Raspberry Pi (Python/Java) → Alert System',
-  },
-  {
     id: 'booking-system',
     title: 'Teacher–Student Booking Appointment',
     tagline: 'Intuitive scheduling system for academic appointments',
@@ -211,46 +169,6 @@ export const projects: Project[] = [
       { phase: 'Testing & Polish', duration: '3 days' },
     ],
     architecture: 'Browser → JavaScript Cart Module → DOM Render (multi-section form)',
-  },
-  {
-    id: 'image-slider',
-    title: 'Interactive Image Slider',
-    tagline: 'Smooth, responsive slider with auto-play and touch support',
-    description:
-      'A smooth, responsive image slider with manual and auto-play controls, transitions, and keyboard navigation built purely with HTML, CSS, and JavaScript.',
-    longDesc:
-      'A lightweight, framework-free image slider demonstrating mastery of CSS transitions and vanilla JavaScript DOM manipulation.',
-    tech: ['HTML', 'CSS', 'JavaScript'],
-    category: 'UI',
-    status: 'Completed',
-    difficulty: 'Beginner',
-    highlights: [
-      'Smooth CSS slide animations',
-      'Auto-play with pause on hover',
-      'Dot navigation indicators',
-      'Fully responsive',
-    ],
-    image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    accent: '#059669',
-    github: 'https://github.com/Akashsp2776/Interactive-Image-Slider',
-    demo: '#',
-    features: [
-      'Auto-play with configurable interval',
-      'Manual prev/next controls',
-      'Dot indicator navigation',
-      'Touch/swipe support',
-      'Responsive for all screen sizes',
-    ],
-    challenges: [
-      { challenge: 'Smooth animation timing without JavaScript animation libraries', solution: 'Used CSS transition with cubic-bezier easing for slide transforms, triggered by class toggling in JavaScript.' },
-    ],
-    learnings: ['CSS transition mastery', 'Vanilla JS event handling', 'Responsive UI without frameworks'],
-    futureImprovements: ['Add lazy loading for images', 'Implement keyboard arrow navigation', 'Add thumbnail strip navigation'],
-    timeline: [
-      { phase: 'Build', duration: '2 days' },
-      { phase: 'Animation Polish', duration: '1 day' },
-    ],
-    architecture: 'Browser → JavaScript Slide Controller → CSS Transition → DOM',
   },
 ]
 

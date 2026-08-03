@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, Github, ExternalLink, BookOpen, CheckCircle2, AlertCircle, Zap } from 'lucide-react'
+import { ArrowUpRight, Github, ExternalLink, BookOpen, CheckCircle2, AlertCircle, Zap, Star, Layers } from 'lucide-react'
 import { projects, type Project } from '../data'
 import { useInView } from '../hooks/useInView'
-import TiltCard from './TiltCard'
 
 const categories = ['All', 'Web', 'Security', 'IoT', 'UI'] as const
 
@@ -13,53 +12,136 @@ function StatusBadge({ status }: { status: Project['status'] }) {
     'In Progress': { icon: AlertCircle, color: 'text-amber-400 bg-amber-400/10 border-amber-400/30' },
     Planning: { icon: Zap, color: 'text-blue-400 bg-blue-400/10 border-blue-400/30' },
   }
-  const { icon: Icon, color } = map[status]
+  const { icon: Icon, color } = map[status] ?? map.Completed
   return <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium ${color}`}><Icon className="h-3 w-3" />{status}</span>
 }
 
 function DifficultyBadge({ level }: { level: Project['difficulty'] }) {
   const colors = { Beginner: 'text-slate-400', Intermediate: 'text-cyan-400', Advanced: 'text-purple-400' }
-  return <span className={`text-xs font-medium ${colors[level]}`}>{level}</span>
+  return <span className={`text-xs font-medium ${colors[level] ?? 'text-slate-400'}`}>{level}</span>
 }
 
-function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
+// Layout variants: each card gets a slightly different visual treatment
+const layouts = [
+  'featured',   // large, image-left
+  'compact',    // tall, image-top
+  'wide',       // wide, image-right
+  'compact',
+  'featured',
+  'wide',
+] as const
+
+function ProjectCard({ project, index, layout, onOpen }: { project: Project; index: number; layout: string; onOpen: () => void }) {
+  const isFeatured = layout === 'featured'
+  const isWide = layout === 'wide'
+
   return (
-    <motion.article layout initial={{ opacity: 0, y: 30, rotateX: -12, filter: 'blur(6px)' }} animate={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
-      <TiltCard maxTilt={3} scale={1.01} className="gradient-border group relative h-full overflow-hidden transition-shadow duration-300 hover:card-3d-shadow-hover">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-t-2xl">
-          <img src={project.image} alt={project.title} loading="lazy" className="h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-110 group-hover:opacity-100" />
-          <div className="absolute inset-0" style={{ background: `linear-gradient(to top, #050816, rgba(5,8,22,0.3) 50%, transparent)` }} />
-          <div className="absolute inset-0 opacity-30 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-50" style={{ background: `radial-gradient(circle at 50% 50%, ${project.accent}, transparent 70%)` }} />
-          <div className="absolute left-4 top-4 flex items-center gap-2" style={{ transform: 'translateZ(30px)' }}><span className="chip backdrop-blur-md">{project.category}</span></div>
-          <div className="absolute right-4 top-4" style={{ transform: 'translateZ(30px)' }}><StatusBadge status={project.status} /></div>
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 40, scale: 0.96, filter: 'blur(8px)' }}
+      animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, y: -20, scale: 0.96 }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-all duration-500 hover:border-white/20 hover:bg-white/[0.05] hover:shadow-[0_20px_60px_-15px_rgba(34,211,238,0.15)] ${
+        isFeatured ? 'sm:col-span-2 lg:col-span-2' : isWide ? 'sm:col-span-2' : ''
+      }`}
+    >
+      {/* Animated gradient accent line on top */}
+      <div className="absolute inset-x-0 top-0 h-px overflow-hidden">
+        <motion.div
+          initial={{ x: '-100%' }}
+          whileInView={{ x: '100%' }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, delay: index * 0.1, ease: 'easeInOut' }}
+          className="h-full w-full"
+          style={{ background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)` }}
+        />
+      </div>
+
+      <div className={`flex flex-col ${isFeatured ? 'md:flex-row' : isWide ? 'sm:flex-row-reverse' : ''}`}>
+        {/* Image section */}
+        <div className={`relative overflow-hidden ${isFeatured ? 'md:w-1/2' : isWide ? 'sm:w-2/5' : 'w-full'} ${isFeatured || isWide ? '' : 'aspect-[16/10]'}`}>
+          <img
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            className="h-full w-full object-cover opacity-70 transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
+          />
+          <div className="absolute inset-0" style={{ background: `linear-gradient(${isFeatured ? 'to right' : 'to top'}, #050816, rgba(5,8,22,0.3) 50%, transparent)` }} />
+          {/* Floating accent glow */}
+          <motion.div
+            animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.1, 1] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: index * 0.3 }}
+            className="pointer-events-none absolute inset-0 mix-blend-overlay"
+            style={{ background: `radial-gradient(circle at 50% 50%, ${project.accent}33, transparent 70%)` }}
+          />
+          {/* Category chip */}
+          <div className="absolute left-4 top-4" style={{ transform: 'translateZ(20px)' }}>
+            <span className="chip backdrop-blur-md">{project.category}</span>
+          </div>
+          {/* Status badge */}
+          <div className="absolute right-4 top-4" style={{ transform: 'translateZ(20px)' }}>
+            <StatusBadge status={project.status} />
+          </div>
         </div>
-        <div className="p-6" style={{ transform: 'translateZ(20px)', transformStyle: 'preserve-3d' }}>
+
+        {/* Content section */}
+        <div className={`flex flex-col p-6 ${isFeatured ? 'md:w-1/2 md:p-8' : isWide ? 'sm:w-3/5 sm:p-6' : ''}`}>
           <div className="flex items-start justify-between gap-3">
-            <h3 className="font-display text-xl font-semibold text-white transition-colors group-hover:text-cyan-300">{project.title}</h3>
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-xs text-slate-500">0{index + 1}</span>
+              <h3 className="font-display text-xl font-semibold text-white transition-colors group-hover:text-cyan-300">{project.title}</h3>
+            </div>
             <DifficultyBadge level={project.difficulty} />
           </div>
           <p className="mt-1.5 text-sm text-slate-500">{project.tagline}</p>
           <p className="mt-3 text-sm leading-relaxed text-slate-400">{project.description}</p>
+
+          {/* Key features as animated pills */}
           <div className="mt-4">
             <p className="mb-2 text-xs font-medium uppercase tracking-wider text-slate-500">Key Features</p>
-            <ul className="space-y-1.5">
-              {project.highlights.slice(0, 3).map((h) => (<li key={h} className="flex items-start gap-2 text-xs text-slate-400"><span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-cyan-400" />{h}</li>))}
-            </ul>
+            <div className="flex flex-wrap gap-2">
+              {project.highlights.slice(0, 3).map((h, hi) => (
+                <motion.span
+                  key={h}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08 + hi * 0.05 + 0.3 }}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-slate-400"
+                >
+                  <Star className="h-2.5 w-2.5 text-cyan-400/60" />
+                  {h}
+                </motion.span>
+              ))}
+            </div>
           </div>
-          <div className="mt-5 flex flex-wrap gap-1.5">
-            {project.tech.map((t) => (<span key={t} className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] font-medium text-slate-300 transition-colors hover:border-cyan-500/30 hover:text-cyan-300">{t}</span>))}
+
+          {/* Tech stack */}
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {project.tech.map((t) => (
+              <span key={t} className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] font-medium text-slate-300 transition-colors hover:border-cyan-500/30 hover:text-cyan-300">{t}</span>
+            ))}
           </div>
-          <div className="mt-6 flex items-center gap-2 border-t border-white/5 pt-5">
+
+          {/* Actions */}
+          <div className="mt-auto flex items-center gap-2 border-t border-white/5 pt-5">
             {project.demo && project.demo !== '#' ? (
               <a href={project.demo} target="_blank" rel="noopener noreferrer" data-hover className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-emerald-500/10 hover:text-emerald-300"><ExternalLink className="h-3.5 w-3.5" />Live Demo</a>
             ) : (
               <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-500"><ExternalLink className="h-3.5 w-3.5" />Coming Soon</span>
             )}
-            <a href={project.github} target="_blank" rel="noopener noreferrer" data-hover className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-white/10 hover:text-white"><Github className="h-3.5 w-3.5" />View Project</a>
+            <a href={project.github} target="_blank" rel="noopener noreferrer" data-hover className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-white/10 hover:text-white"><Github className="h-3.5 w-3.5" />Code</a>
             <button onClick={onOpen} data-hover className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 px-3 py-2 text-xs font-medium text-cyan-400 transition-all hover:from-blue-600/30 hover:to-purple-600/30"><BookOpen className="h-3.5 w-3.5" />Case Study<ArrowUpRight className="h-3 w-3" /></button>
           </div>
         </div>
-      </TiltCard>
+      </div>
+
+      {/* Hover glow border effect */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{ boxShadow: `inset 0 0 0 1px ${project.accent}40, 0 0 40px -10px ${project.accent}30` }}
+      />
     </motion.article>
   )
 }
@@ -72,8 +154,15 @@ export default function Work({ onOpenCaseStudy }: { onOpenCaseStudy: (id: string
   return (
     <section id="portfolio" ref={ref} className="py-section relative">
       <div className="pointer-events-none absolute left-1/3 top-1/4 h-80 w-80 rounded-full bg-blue-600/10 blur-[120px]" />
+      <div className="pointer-events-none absolute right-1/4 bottom-1/4 h-72 w-72 rounded-full bg-purple-600/10 blur-[120px]" />
+
       <div className="px-container mx-auto max-w-7xl">
-        <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <motion.div
+          initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+          animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+        >
           <div>
             <span className="eyebrow mb-6"><span className="h-px w-8 bg-cyan-400" />Engineering Portfolio</span>
             <h2 className="section-title text-balance">Projects I've built — each one a learning milestone.</h2>
@@ -95,11 +184,27 @@ export default function Work({ onOpenCaseStudy }: { onOpenCaseStudy: (id: string
             ))}
           </div>
         </motion.div>
+
         <motion.div layout className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
-            {filtered.map((p, i) => (<ProjectCard key={p.id} project={p} index={i} onOpen={() => onOpenCaseStudy(p.id)} />))}
+            {filtered.map((p, i) => (
+              <ProjectCard
+                key={p.id}
+                project={p}
+                index={i}
+                layout={layouts[i % layouts.length]}
+                onOpen={() => onOpenCaseStudy(p.id)}
+              />
+            ))}
           </AnimatePresence>
         </motion.div>
+
+        {filtered.length === 0 && (
+          <div className="mt-12 flex flex-col items-center gap-3 text-center">
+            <Layers className="h-10 w-10 text-slate-600" />
+            <p className="text-sm text-slate-500">No projects in this category yet.</p>
+          </div>
+        )}
       </div>
     </section>
   )
