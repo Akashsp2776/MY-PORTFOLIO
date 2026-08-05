@@ -5,12 +5,12 @@ import { useCounter } from '../hooks/useCounter'
 import { stats, learningJourney } from '../data'
 
 const storyPoints = [
-  { title: 'Passion for Software Engineering', text: 'I love the craft of turning ideas into working systems. From writing my first C program to building full-stack applications, every line of code reinforces my drive to create software that matters.', color: '#2563eb', icon: Code2 },
-  { title: 'Full Stack Development', text: 'I own the entire stack — designing responsive UIs with React and Tailwind, building REST APIs with Node.js, and modeling databases with MySQL and MongoDB. End-to-end thinking is my superpower.', color: '#7c3aed', icon: Layers },
-  { title: 'Java Development', text: 'Java taught me to think in objects, design clean abstractions, and write maintainable code. Through my internship at INTERNPE, I built production Java applications using OOP, JDBC, and Collections.', color: '#0891b2', icon: Code2 },
-  { title: 'Artificial Intelligence', text: 'I actively explore how generative AI can augment development — from ChatGPT to GitHub Copilot. I hold certifications in AI Tools, Generative AI, and AI Ethics, and I am building toward AI-powered developer tools.', color: '#059669', icon: Brain },
-  { title: 'Problem Solving', text: 'Whether it is implementing SHA-256 hashing from scratch or integrating Arduino sensors with Python, I break complex problems into solvable pieces and ship working solutions.', color: '#d97706', icon: Target },
-  { title: 'Continuous Learning', text: 'My journey from C to Full Stack spans 5 years and 15+ technologies. I learn by building — every project is a new skill acquired, a new challenge conquered, a new lesson internalized.', color: '#a855f7', icon: Zap },
+  { title: 'Passion for Software Engineering', text: 'I love the craft of turning ideas into working systems. From writing my first C program to building full-stack applications, every line of code reinforces my drive to create software that matters.', icon: Code2 },
+  { title: 'Full Stack Development', text: 'I own the entire stack — designing responsive UIs with React and Tailwind, building REST APIs with Node.js, and modeling databases with MySQL and MongoDB. End-to-end thinking is my superpower.', icon: Layers },
+  { title: 'Java Development', text: 'Java taught me to think in objects, design clean abstractions, and write maintainable code. Through my internship at INTERNPE, I built production Java applications using OOP, JDBC, and Collections.', icon: Code2 },
+  { title: 'Artificial Intelligence', text: 'I actively explore how generative AI can augment development — from ChatGPT to GitHub Copilot. I hold certifications in AI Tools, Generative AI, and AI Ethics, and I am building toward AI-powered developer tools.', icon: Brain },
+  { title: 'Problem Solving', text: 'Whether it is implementing SHA-256 hashing from scratch or integrating Arduino sensors with Python, I break complex problems into solvable pieces and ship working solutions.', icon: Target },
+  { title: 'Continuous Learning', text: 'My journey from C to Full Stack spans 5 years and 15+ technologies. I learn by building — every project is a new skill acquired, a new challenge conquered, a new lesson internalized.', icon: Zap },
 ]
 
 const goals = [
@@ -29,11 +29,8 @@ function StatCounter({ stat, index, start }: { stat: typeof stats[number]; index
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="card-premium group relative overflow-hidden p-6 text-center">
-        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(124,58,237,0.08), transparent 70%)' }} />
-        <div className="relative font-display text-4xl font-bold text-gradient-blue animate-aurora-text">
-          {value}{stat.suffix}
-        </div>
-        <div className="relative mt-2 text-xs uppercase tracking-wider text-slate-400">{stat.label}</div>
+        <div className="relative font-display text-4xl font-bold text-white">{value}{stat.suffix}</div>
+        <div className="relative mt-2 text-xs uppercase tracking-wider text-neutral-500">{stat.label}</div>
       </div>
     </motion.div>
   )
@@ -43,13 +40,12 @@ export default function About() {
   const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
-    <section id="about" ref={ref} className="py-section relative">
-      <div className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-blue-600/10 blur-[120px]" />
+    <section id="about" ref={ref} className="py-section relative bg-alt">
       <div className="px-container mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
-          <span className="eyebrow mb-6"><span className="h-px w-8 bg-cyan-400" />About Me</span>
+          <span className="eyebrow mb-6"><span className="h-px w-8 bg-neutral-600" />About Me</span>
           <h2 className="section-title text-balance max-w-3xl">A future software engineer who builds, learns, and ships.</h2>
-          <p className="mt-6 max-w-3xl text-balance text-base leading-relaxed text-slate-400 sm:text-lg">
+          <p className="mt-6 max-w-3xl text-balance text-base leading-relaxed text-neutral-400 sm:text-lg">
             I am a Computer Science Engineering student at Presidency University, Bengaluru, driven by a singular obsession — building software that works, scales, and matters. What sets me apart is not the coursework on my transcript but the hours I have spent outside of it: architecting a cryptographically secure voting system, engineering an IoT pipeline that monitors water quality in real time, and shipping full-stack web applications used by real people. I do not wait for permission to build. I learn by doing, I ship by habit, and I treat every bug as a puzzle worth solving. I am actively seeking a Software Engineering internship where I can bring this builder's mindset to a team that ships products people rely on.
           </p>
         </motion.div>
@@ -62,15 +58,14 @@ export default function About() {
           {storyPoints.map((sp, i) => (
             <motion.div key={sp.title} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}>
               <div className="card-premium group h-full p-6">
-                <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: `${sp.color}30` }} />
                 <div className="relative mb-4 flex items-center gap-3">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl" style={{ background: `${sp.color}20`, border: `1px solid ${sp.color}40` }}>
-                    <sp.icon className="h-5 w-5" style={{ color: sp.color }} />
+                  <span className="grid h-11 w-11 place-items-center rounded-xl border border-[#2a2a2a] bg-[#161616] text-white transition-colors group-hover:border-[#3a3a3a]">
+                    <sp.icon className="h-5 w-5" />
                   </span>
-                  <div className="h-1 flex-1 rounded-full" style={{ background: `linear-gradient(90deg, ${sp.color}, transparent)` }} />
+                  <div className="h-px flex-1 bg-[#2a2a2a]" />
                 </div>
                 <h3 className="relative font-display text-lg font-semibold text-white">{sp.title}</h3>
-                <p className="relative mt-2 text-sm leading-relaxed text-slate-400">{sp.text}</p>
+                <p className="relative mt-2 text-sm leading-relaxed text-neutral-400">{sp.text}</p>
               </div>
             </motion.div>
           ))}
@@ -78,21 +73,21 @@ export default function About() {
 
         <div className="mt-16">
           <motion.h3 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3 }} className="mb-8 flex items-center gap-2 font-display text-xl font-semibold text-white">
-            <Trophy className="h-5 w-5 text-cyan-400" />My Learning Journey
+            <Trophy className="h-5 w-5 text-white" />My Learning Journey
           </motion.h3>
           <div className="relative">
-            <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-blue-500/50 via-purple-500/30 to-transparent md:left-1/2" />
+            <div className="absolute left-4 top-0 h-full w-px bg-[#2a2a2a] md:left-1/2" />
             <div className="space-y-8">
               {learningJourney.map((step, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }} animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}} transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }} className={`relative flex md:items-center ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                  <div className="absolute left-4 z-10 grid h-8 w-8 -translate-x-1/2 place-items-center rounded-full border bg-bg md:left-1/2" style={{ borderColor: `${step.color}60`, boxShadow: `0 0 20px -5px ${step.color}80` }}>
-                    <div className="h-2.5 w-2.5 rounded-full" style={{ background: step.color }} />
+                  <div className="absolute left-4 z-10 grid h-8 w-8 -translate-x-1/2 place-items-center rounded-full border border-[#2a2a2a] bg-black md:left-1/2">
+                    <div className="h-2.5 w-2.5 rounded-full bg-white" />
                   </div>
                   <div className={`ml-12 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                    <div className="card-premium p-5 transition-all duration-300 hover:scale-[1.02]">
-                      <span className="font-mono text-xs font-medium" style={{ color: step.color }}>{step.year}</span>
+                    <div className="card-premium p-5">
+                      <span className="font-mono text-xs font-medium text-neutral-500">{step.year}</span>
                       <h4 className="mt-1 font-display text-base font-semibold text-white">{step.title}</h4>
-                      <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{step.desc}</p>
+                      <p className="mt-1.5 text-sm leading-relaxed text-neutral-400">{step.desc}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -105,9 +100,9 @@ export default function About() {
           <h3 className="font-display text-xl font-semibold text-white">Career Goals</h3>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {goals.map((g, i) => (
-              <motion.div key={i} initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.6 + i * 0.1 }} className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/5 p-4 transition-colors hover:border-purple-500/30">
-                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600 text-xs font-bold text-white">{i + 1}</span>
-                <p className="text-sm leading-relaxed text-slate-300">{g}</p>
+              <motion.div key={i} initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.6 + i * 0.1 }} className="flex items-start gap-3 rounded-xl border border-[#2a2a2a] bg-[#161616] p-4 transition-colors hover:border-[#3a3a3a]">
+                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white text-xs font-bold text-black">{i + 1}</span>
+                <p className="text-sm leading-relaxed text-neutral-300">{g}</p>
               </motion.div>
             ))}
           </div>

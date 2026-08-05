@@ -48,13 +48,13 @@ export default function StarField() {
         const alpha = (Math.sin(s.twinkle) * 0.4 + 0.6) * s.z
         ctx.beginPath()
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(200, 220, 255, ${alpha * 0.6})`
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.6})`
         ctx.fill()
 
         if (s.size > 1) {
           ctx.beginPath()
           ctx.arc(s.x, s.y, s.size * 2, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(124, 58, 237, ${alpha * 0.08})`
+          ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.08})`
           ctx.fill()
         }
       }
