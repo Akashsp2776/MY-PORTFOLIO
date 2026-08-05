@@ -31,7 +31,7 @@ function ProjectCard({ project, index, onOpen }: { project: Project; index: numb
       animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
       exit={{ opacity: 0, y: -20, scale: 0.96 }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm transition-all duration-500 hover:border-white/20 hover:bg-white/[0.05] hover:shadow-[0_20px_60px_-15px_rgba(34,211,238,0.15)]"
+      className="card-premium group relative overflow-hidden rounded-3xl"
     >
       {/* Animated gradient accent line on top */}
       <div className="absolute inset-x-0 top-0 h-px overflow-hidden">
@@ -56,7 +56,7 @@ function ProjectCard({ project, index, onOpen }: { project: Project; index: numb
               className="h-full w-full object-cover opacity-70 transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
             />
           </div>
-          <div className="absolute inset-0" style={{ background: `linear-gradient(${reversed ? 'to left' : 'to right'}, #050816, rgba(5,8,22,0.3) 50%, transparent)` }} />
+          <div className="absolute inset-0" style={{ background: `linear-gradient(${reversed ? 'to left' : 'to right'}, #050505, rgba(5,5,5,0.3) 50%, transparent)` }} />
           {/* Floating accent glow */}
           <motion.div
             animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.1, 1] }}
@@ -116,12 +116,12 @@ function ProjectCard({ project, index, onOpen }: { project: Project; index: numb
           {/* Actions */}
           <div className="mt-auto flex items-center gap-2 border-t border-white/5 pt-5">
             {project.demo && project.demo !== '#' ? (
-              <a href={project.demo} target="_blank" rel="noopener noreferrer" data-hover className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-emerald-500/10 hover:text-emerald-300"><ExternalLink className="h-3.5 w-3.5" />Live Demo</a>
+              <a href={project.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-emerald-500/10 hover:text-emerald-300"><ExternalLink className="h-3.5 w-3.5" />Live Demo</a>
             ) : (
               <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-500"><ExternalLink className="h-3.5 w-3.5" />Coming Soon</span>
             )}
-            <a href={project.github} target="_blank" rel="noopener noreferrer" data-hover className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-white/10 hover:text-white"><Github className="h-3.5 w-3.5" />Code</a>
-            <button onClick={onOpen} data-hover className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 px-3 py-2 text-xs font-medium text-cyan-400 transition-all hover:from-blue-600/30 hover:to-purple-600/30"><BookOpen className="h-3.5 w-3.5" />Case Study<ArrowUpRight className="h-3 w-3" /></button>
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:bg-white/10 hover:text-white"><Github className="h-3.5 w-3.5" />Code</a>
+            <button onClick={onOpen} className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-600/20 to-purple-600/20 px-3 py-2 text-xs font-medium text-cyan-400 transition-all hover:from-blue-600/30 hover:to-purple-600/30"><BookOpen className="h-3.5 w-3.5" />Case Study<ArrowUpRight className="h-3 w-3" /></button>
           </div>
         </div>
       </div>
@@ -161,7 +161,6 @@ export default function Work({ onOpenCaseStudy }: { onOpenCaseStudy: (id: string
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                data-hover
                 className={`relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
                   filter === cat
                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-[0_0_20px_-5px_rgba(124,58,237,0.5)]'

@@ -1,6 +1,6 @@
 import { motion, useTransform, useScroll } from 'framer-motion'
 import { useEffect } from 'react'
-import { ArrowRight, Download, Github, Linkedin, Mail, Code2, Sparkles, MapPin, Terminal, Cpu, Database, Bot } from 'lucide-react'
+import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, MapPin, Terminal } from 'lucide-react'
 import { personal } from '../data'
 import { useTypingEffect } from '../hooks/useTypingEffect'
 import StarField from './StarField'
@@ -25,7 +25,6 @@ const item = {
   show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 }
 
-/* Animated spark particles that orbit around the name */
 const nameParticles = [
   { size: 3, x: '-8%', y: '20%', delay: 0, dur: 3.2, color: '#22d3ee' },
   { size: 2, x: '102%', y: '70%', delay: 0.6, dur: 4, color: '#818cf8' },
@@ -37,7 +36,6 @@ const nameParticles = [
 
 export default function Hero() {
   const typed = useTypingEffect(personal.roles)
-
   const { scrollY } = useScroll()
   const yGlow1 = useTransform(scrollY, [0, 600], [0, 120])
   const yGlow2 = useTransform(scrollY, [0, 600], [0, -80])
@@ -52,32 +50,32 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 opacity-60"><StarField /></div>
-      <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-b opacity-30" />
+      <div className="absolute inset-0 opacity-50"><StarField /></div>
+      <div className="pointer-events-none absolute inset-0 grid-bg mask-fade-b opacity-20" />
       <motion.div style={{ y: yGlow1 }} className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px] animate-float-slow" />
       <motion.div style={{ y: yGlow2 }} className="pointer-events-none absolute right-0 top-40 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px] animate-float" />
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[100px]" />
 
       <motion.div style={{ y: yIcons }} className="pointer-events-none absolute inset-0 hidden lg:block">
-      {floatingIcons.map((fi) => (
-        <motion.div
-          key={fi.label}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1 + fi.delay * 0.2, duration: 0.5 }}
-          className="pointer-events-none absolute"
-          style={{ left: fi.x, top: fi.y }}
-        >
+        {floatingIcons.map((fi) => (
           <motion.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 4 + fi.delay, repeat: Infinity, ease: 'easeInOut' }}
-            className="glass flex items-center gap-2 rounded-xl px-3 py-2"
+            key={fi.label}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1 + fi.delay * 0.2, duration: 0.5 }}
+            className="pointer-events-none absolute"
+            style={{ left: fi.x, top: fi.y }}
           >
-            <span className="text-xl">{fi.icon}</span>
-            <span className="font-mono text-xs text-slate-300">{fi.label}</span>
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 4 + fi.delay, repeat: Infinity, ease: 'easeInOut' }}
+              className="glass flex items-center gap-2 rounded-xl px-3 py-2"
+            >
+              <span className="text-xl">{fi.icon}</span>
+              <span className="font-mono text-xs text-slate-300">{fi.label}</span>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      ))}
+        ))}
       </motion.div>
 
       <motion.div style={{ opacity: opacityHero }} className="relative px-container mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-12 pt-28 pb-16 lg:flex-row">
@@ -95,9 +93,7 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* ── NAME with animated background effects ── */}
           <motion.div variants={item} className="relative mb-2">
-            {/* Blurred glow blobs behind the name */}
             <div className="pointer-events-none absolute inset-0 -z-10 overflow-visible">
               <motion.div
                 animate={{ scale: [1, 1.15, 1], opacity: [0.35, 0.55, 0.35] }}
@@ -116,7 +112,6 @@ export default function Hero() {
               />
             </div>
 
-            {/* Spark particles */}
             {nameParticles.map((p, i) => (
               <motion.div
                 key={i}
@@ -133,7 +128,6 @@ export default function Hero() {
               </motion.div>
             ))}
 
-            {/* Horizontal shimmer line under name */}
             <motion.div
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
@@ -149,7 +143,6 @@ export default function Hero() {
                 style={{ textShadow: '0 0 60px rgba(34,211,238,0.35), 0 0 120px rgba(99,102,241,0.2)' }}
               >
                 SP
-                {/* letter-level glow ring */}
                 <motion.span
                   animate={{ opacity: [0.4, 0.8, 0.4] }}
                   transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -161,15 +154,17 @@ export default function Hero() {
           </motion.div>
 
           <motion.div variants={item} className="mt-5 flex items-center gap-3">
-            <Code2 className="h-5 w-5 shrink-0 text-purple-400" />
+            <Terminal className="h-5 w-5 shrink-0 text-purple-400" />
             <span className="font-mono text-base text-slate-300 sm:text-lg">
               {typed}
               <span className="ml-0.5 inline-block h-5 w-0.5 animate-pulse bg-cyan-400" />
             </span>
           </motion.div>
+
           <motion.p variants={item} className="mt-8 max-w-xl text-balance text-base leading-relaxed text-slate-400 sm:text-lg">
             {personal.summary}
           </motion.p>
+
           <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#portfolio" className="btn-primary group">
               View Engineering Portfolio
@@ -181,6 +176,7 @@ export default function Hero() {
             </a>
             <a href="#contact" className="btn-ghost">Contact Me</a>
           </motion.div>
+
           <motion.div variants={item} className="mt-8 flex items-center gap-4">
             <span className="font-mono text-xs uppercase tracking-wider text-slate-500">Find me on</span>
             <div className="flex items-center gap-3">
@@ -195,7 +191,6 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  data-hover
                   className="group grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-white hover:shadow-[0_8px_20px_-6px_rgba(124,58,237,0.5)]"
                 >
                   <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
@@ -203,7 +198,6 @@ export default function Hero() {
               ))}
             </div>
           </motion.div>
-
         </motion.div>
 
         <motion.div
@@ -254,9 +248,9 @@ export default function Hero() {
 }`}
                 </pre>
                 <div className="mt-3 flex items-center gap-2 border-t border-white/5 pt-3">
-                  <Cpu className="h-3 w-3 text-purple-400" />
-                  <Database className="h-3 w-3 text-cyan-400" />
-                  <Bot className="h-3 w-3 text-blue-400" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-purple-400" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
                   <span className="ml-auto font-mono text-[10px] text-slate-500">v2.0</span>
                 </div>
               </div>

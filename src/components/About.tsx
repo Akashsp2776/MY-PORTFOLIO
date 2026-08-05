@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion'
-import { Code2, Layers, Brain, Target, Trophy, Zap } from 'lucide-react'
+import { Code2, Layers, Brain, Target, Zap, Trophy } from 'lucide-react'
 import { useInView } from '../hooks/useInView'
 import { useCounter } from '../hooks/useCounter'
 import { stats, learningJourney } from '../data'
-import TiltCard from './TiltCard'
 
 const storyPoints = [
   { title: 'Passion for Software Engineering', text: 'I love the craft of turning ideas into working systems. From writing my first C program to building full-stack applications, every line of code reinforces my drive to create software that matters.', color: '#2563eb', icon: Code2 },
@@ -25,19 +24,17 @@ function StatCounter({ stat, index, start }: { stat: typeof stats[number]; index
   const value = useCounter(stat.value, 2000, start)
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, rotateX: -15 }}
-      animate={start ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+      initial={{ opacity: 0, y: 20 }}
+      animate={start ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      style={{ transformStyle: 'preserve-3d' }}
-      className="perspective-1000"
     >
-      <TiltCard maxTilt={3} scale={1.02} className="gradient-border group relative overflow-hidden p-6 text-center transition-shadow duration-300 hover:card-3d-shadow-hover">
-        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(124,58,237,0.1), transparent 70%)' }} />
-        <div className="relative font-display text-4xl font-bold text-gradient-blue animate-aurora-text" style={{ transform: 'translateZ(30px)' }}>
+      <div className="card-premium group relative overflow-hidden p-6 text-center">
+        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(124,58,237,0.08), transparent 70%)' }} />
+        <div className="relative font-display text-4xl font-bold text-gradient-blue animate-aurora-text">
           {value}{stat.suffix}
         </div>
-        <div className="relative mt-2 text-xs uppercase tracking-wider text-slate-400" style={{ transform: 'translateZ(20px)' }}>{stat.label}</div>
-      </TiltCard>
+        <div className="relative mt-2 text-xs uppercase tracking-wider text-slate-400">{stat.label}</div>
+      </div>
     </motion.div>
   )
 }
@@ -63,18 +60,18 @@ export default function About() {
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {storyPoints.map((sp, i) => (
-            <motion.div key={sp.title} initial={{ opacity: 0, y: 30, rotateX: -15 }} animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }} style={{ transformStyle: 'preserve-3d' }} className="perspective-1000">
-              <TiltCard maxTilt={3} scale={1.02} className="gradient-border group h-full p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
+            <motion.div key={sp.title} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}>
+              <div className="card-premium group h-full p-6">
                 <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: `${sp.color}30` }} />
-                <div className="relative mb-4 flex items-center gap-3" style={{ transform: 'translateZ(30px)' }}>
+                <div className="relative mb-4 flex items-center gap-3">
                   <span className="grid h-11 w-11 place-items-center rounded-xl" style={{ background: `${sp.color}20`, border: `1px solid ${sp.color}40` }}>
                     <sp.icon className="h-5 w-5" style={{ color: sp.color }} />
                   </span>
                   <div className="h-1 flex-1 rounded-full" style={{ background: `linear-gradient(90deg, ${sp.color}, transparent)` }} />
                 </div>
-                <h3 className="relative font-display text-lg font-semibold text-white" style={{ transform: 'translateZ(20px)' }}>{sp.title}</h3>
-                <p className="relative mt-2 text-sm leading-relaxed text-slate-400" style={{ transform: 'translateZ(15px)' }}>{sp.text}</p>
-              </TiltCard>
+                <h3 className="relative font-display text-lg font-semibold text-white">{sp.title}</h3>
+                <p className="relative mt-2 text-sm leading-relaxed text-slate-400">{sp.text}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -92,7 +89,7 @@ export default function About() {
                     <div className="h-2.5 w-2.5 rounded-full" style={{ background: step.color }} />
                   </div>
                   <div className={`ml-12 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                    <div className="gradient-border p-5 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_-10px_rgba(124,58,237,0.4)]">
+                    <div className="card-premium p-5 transition-all duration-300 hover:scale-[1.02]">
                       <span className="font-mono text-xs font-medium" style={{ color: step.color }}>{step.year}</span>
                       <h4 className="mt-1 font-display text-base font-semibold text-white">{step.title}</h4>
                       <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{step.desc}</p>
@@ -104,7 +101,7 @@ export default function About() {
           </div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}} transition={{ duration: 0.7, delay: 0.5 }} className="gradient-border mt-12 p-8">
+        <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}} transition={{ duration: 0.7, delay: 0.5 }} className="card-premium mt-12 p-8">
           <h3 className="font-display text-xl font-semibold text-white">Career Goals</h3>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {goals.map((g, i) => (

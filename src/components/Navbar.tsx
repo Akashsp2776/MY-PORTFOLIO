@@ -19,7 +19,7 @@ export default function Navbar() {
   const active = useScrollSpy(navItems.map((n) => n.href.slice(1)))
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -32,10 +32,10 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
       className="fixed inset-x-0 top-0 z-50"
     >
-      <div className={`transition-all duration-500 ${scrolled ? 'glass-strong border-b border-white/5' : 'bg-transparent'}`}>
+      <div className={`transition-all duration-500 ${scrolled ? 'glass-strong border-b border-white/[0.04]' : 'bg-transparent'}`}>
         <nav className="px-container mx-auto flex max-w-7xl items-center justify-between py-4">
-          <a href="#home" className="group flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 font-mono text-sm font-bold text-white shadow-lg shadow-purple-600/30 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+          <a href="#home" className="group flex items-center gap-2.5" aria-label="Home">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 font-mono text-sm font-bold text-white shadow-lg shadow-purple-600/20 transition-transform duration-300 group-hover:scale-110">
               &lt;/&gt;
             </span>
             <span className="font-display text-lg font-semibold tracking-tight text-white">
@@ -43,7 +43,7 @@ export default function Navbar() {
             </span>
           </a>
 
-          <div className="hidden items-center gap-1 lg:flex">
+          <div className="hidden items-center gap-0.5 lg:flex">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -55,8 +55,8 @@ export default function Navbar() {
                 {active === item.href.slice(1) && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 ring-1 ring-purple-500/30"
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                    className="absolute inset-0 rounded-full bg-white/[0.06] ring-1 ring-white/10"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
                 <span className="relative">{item.label}</span>
@@ -67,15 +67,16 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <a
               href="#resume"
-              className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_25px_-5px_rgba(124,58,237,0.6)] hover:scale-105 sm:inline-flex"
+              className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_24px_-6px_rgba(124,58,237,0.6)] hover:brightness-110 sm:inline-flex"
             >
               <Download className="h-4 w-4" />
               Resume
             </a>
             <button
               onClick={() => setOpen((v) => !v)}
-              className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 text-white transition-colors hover:bg-white/5 lg:hidden"
-              aria-label="Menu"
+              className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white transition-colors hover:bg-white/5 lg:hidden"
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -89,8 +90,8 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="glass-strong overflow-hidden border-b border-white/5 lg:hidden"
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="glass-strong overflow-hidden border-b border-white/[0.04] lg:hidden"
           >
             <div className="px-container mx-auto flex max-w-7xl flex-col gap-1 py-4">
               {navItems.map((item) => (
@@ -99,7 +100,7 @@ export default function Navbar() {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={`rounded-xl px-4 py-3 text-base font-medium transition-colors ${
-                    active === item.href.slice(1) ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/5'
+                    active === item.href.slice(1) ? 'bg-white/[0.06] text-white' : 'text-slate-300 hover:bg-white/[0.04]'
                   }`}
                 >
                   {item.label}

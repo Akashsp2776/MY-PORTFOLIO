@@ -22,17 +22,17 @@ export default function Skills() {
           {skillGroups.map((cat, i) => (
             <motion.div
               key={cat.id}
-              initial={{ opacity: 0, y: 30, rotateX: -12, filter: 'blur(6px)' }}
-              animate={inView ? { opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' } : {}}
+              initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+              animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
               transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               style={{ transformStyle: 'preserve-3d' }}
               className="perspective-1000"
             >
-              <TiltCard maxTilt={3} scale={1.02} className="gradient-border group relative overflow-hidden p-6 transition-shadow duration-300 hover:card-3d-shadow-hover">
+              <TiltCard maxTilt={3} scale={1.02} className="card-premium group relative h-full overflow-hidden p-6">
                 <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style={{ background: cat.glow }} />
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: `radial-gradient(circle at 50% 0%, ${cat.color}10, transparent 60%)` }} />
 
-                <div className="relative flex items-center gap-3" style={{ transform: 'translateZ(30px)', transformStyle: 'preserve-3d' }}>
+                <div className="relative flex items-center gap-3">
                   <motion.span
                     className="grid h-12 w-12 place-items-center rounded-xl text-2xl"
                     style={{ background: `${cat.color}20`, border: `1px solid ${cat.color}40` }}
@@ -43,7 +43,7 @@ export default function Skills() {
                   <h3 className="font-display text-lg font-semibold text-white">{cat.label}</h3>
                 </div>
 
-                <div className="relative mt-6 space-y-4" style={{ transform: 'translateZ(20px)', transformStyle: 'preserve-3d' }}>
+                <div className="relative mt-6 space-y-4">
                   {cat.skills.map((skill, idx) => (
                     <div key={skill.name} className="group/skill">
                       <div className="mb-1.5 flex items-center justify-between text-xs">
@@ -73,7 +73,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
           animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="gradient-border mx-auto mt-8 max-w-3xl overflow-hidden p-6"
+          className="card-premium mx-auto mt-8 max-w-3xl p-6"
         >
           <h3 className="mb-4 flex items-center justify-center gap-2 font-display text-base font-semibold text-white">
             <span className="h-px w-6 bg-gradient-to-r from-transparent to-cyan-400" />

@@ -15,8 +15,6 @@ import Education from './components/Education'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import Scene3D from './components/Scene3D'
-import AuroraOrbs from './components/AuroraOrbs'
 import { projects } from './data'
 
 export default function App() {
@@ -30,8 +28,6 @@ export default function App() {
   return (
     <div className="noise-overlay relative min-h-screen overflow-x-hidden">
       <Loader />
-      <Scene3D />
-      <AuroraOrbs />
       <MouseGlow />
       <ScrollProgress />
       <Navbar />

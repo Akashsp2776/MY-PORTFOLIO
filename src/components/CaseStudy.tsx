@@ -35,11 +35,11 @@ export default function CaseStudy({ project, onBack }: { project: Project; onBac
             <p className="text-base leading-relaxed text-slate-400">{project.longDesc}</p>
           </section>
           <div className="grid gap-6 md:grid-cols-2">
-            <section className="gradient-border p-6">
+            <section className="card-premium p-6">
               <h3 className="mb-3 flex items-center gap-2 font-display text-lg font-semibold text-white"><AlertTriangle className="h-5 w-5 text-amber-400" />Problem Statement</h3>
               <p className="text-sm leading-relaxed text-slate-400">{project.description}</p>
             </section>
-            <section className="gradient-border p-6">
+            <section className="card-premium p-6">
               <h3 className="mb-3 flex items-center gap-2 font-display text-lg font-semibold text-white"><Lightbulb className="h-5 w-5 text-cyan-400" />Solution</h3>
               <p className="text-sm leading-relaxed text-slate-400">{project.architecture}</p>
             </section>
@@ -58,7 +58,7 @@ export default function CaseStudy({ project, onBack }: { project: Project; onBac
           </section>
           <section>
             <h2 className="mb-4 flex items-center gap-2 font-display text-2xl font-semibold text-white"><Layers className="h-5 w-5 text-blue-400" />Architecture Diagram</h2>
-            <div className="gradient-border overflow-hidden p-6">
+            <div className="card-premium overflow-hidden p-6">
               <div className="flex flex-wrap items-center justify-center gap-3 text-center">
                 {project.architecture.split('→').map((node, idx, arr) => (
                   <div key={idx} className="flex items-center gap-3">
@@ -75,7 +75,7 @@ export default function CaseStudy({ project, onBack }: { project: Project; onBac
               {project.timeline.map((t, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600 text-xs font-bold text-white">{i + 1}</div>
-                  <div className="flex-1 gradient-border p-4"><span className="font-medium text-white">{t.phase}</span><span className="ml-3 font-mono text-xs text-slate-500">{t.duration}</span></div>
+                  <div className="card-premium flex-1 p-4"><span className="font-medium text-white">{t.phase}</span><span className="ml-3 font-mono text-xs text-slate-500">{t.duration}</span></div>
                 </div>
               ))}
             </div>
@@ -84,7 +84,7 @@ export default function CaseStudy({ project, onBack }: { project: Project; onBac
             <h2 className="mb-4 flex items-center gap-2 font-display text-2xl font-semibold text-white"><AlertTriangle className="h-5 w-5 text-amber-400" />Challenges Faced & How I Solved Them</h2>
             <div className="space-y-4">
               {project.challenges.map((c, i) => (
-                <div key={i} className="gradient-border p-6">
+                <div key={i} className="card-premium p-6">
                   <div className="mb-3"><span className="mb-1 block text-xs font-medium uppercase tracking-wider text-amber-400">Challenge</span><p className="text-sm text-slate-300">{c.challenge}</p></div>
                   <div><span className="mb-1 block text-xs font-medium uppercase tracking-wider text-emerald-400">Solution</span><p className="text-sm text-slate-300">{c.solution}</p></div>
                 </div>
